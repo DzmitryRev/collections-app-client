@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Header from "./widgets/Header";
 import { CssBaseline } from "@mui/material";
+import Header from "./widgets/Header";
 
 function App() {
   return (
