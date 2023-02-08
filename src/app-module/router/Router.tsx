@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { LoginForm } from "../../modules/auth-module";
 
 export default function Router() {
   return (
@@ -7,6 +8,7 @@ export default function Router() {
       {/**
        * Routes
        */}
+       <Route path="login" element={<LoginForm />} />
     </Routes>
   );
 }

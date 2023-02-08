@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Header from "./widgets/Header";
 import { CssBaseline } from "@mui/material";
+import Router from "./router/Router";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
          * router outlet
          * footer
          */}
+         <Router />
       </Box>
     </>
   );
