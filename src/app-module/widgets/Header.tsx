@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, BoxProps, Divider, styled, useTheme } from "@mui/material";
-// import { Logo } from "../../shared/components";
+import { Button, Logo } from "../../shared/components";
 import { DefaultThemeSwitcher } from "../../modules/theme-module";
 import AppSettingsMobile from "./AppSettingsMobile";
 
@@ -16,6 +16,9 @@ const HeaderHandlersContainerSX = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+};
+const HeaderLoginContainerSX = {
+  ml: 2,
 };
 
 const MobileSettingsContainerSX = styled(Box)(({ theme }) => ({
@@ -35,7 +38,7 @@ export default function Header() {
   return (
     <>
       <Box sx={HeaderContainerSX}>
-        {/* <Logo /> */}
+        <Logo />
         <Box sx={HeaderHandlersContainerSX}>
           <MobileSettingsContainerSX>
             <AppSettingsMobile />
@@ -43,6 +46,11 @@ export default function Header() {
           <PCSettingsContainerSX>
             <DefaultThemeSwitcher />
           </PCSettingsContainerSX>
+          <Box sx={HeaderLoginContainerSX}>
+            <Button variant="contained" size="small">
+              Login
+            </Button>
+          </Box>
         </Box>
       </Box>
       <Divider />
