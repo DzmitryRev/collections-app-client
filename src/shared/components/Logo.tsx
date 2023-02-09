@@ -1,10 +1,9 @@
 import React from "react";
 import { Typography, useTheme } from "@mui/material";
 
-// completed
-
-export default function Logo() {
+export function Logo() {
   const theme = useTheme();
+
   return (
     <Typography
       sx={{
