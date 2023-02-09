@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, BoxProps, Divider, styled, useTheme } from "@mui/material";
-import { Logo } from "../../shared/components";
+// import { Logo } from "../../shared/components";
 import { DefaultThemeSwitcher } from "../../modules/theme-module";
 import AppSettingsMobile from "./AppSettingsMobile";
 
@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <>
       <Box sx={HeaderContainerSX}>
-        <Logo />
+        {/* <Logo /> */}
         <Box sx={HeaderHandlersContainerSX}>
           <MobileSettingsContainerSX>
             <AppSettingsMobile />
