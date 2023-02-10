@@ -3,5 +3,8 @@ export const ru = {
     header: {
       login: "войти",
     },
+    ["mobile language switcher"]: {
+      language: "Язык",
+    },
   },
 };

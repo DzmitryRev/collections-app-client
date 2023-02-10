@@ -3,8 +3,11 @@ import { ListItemText, Switch, ToggleButton, ToggleButtonGroup, Typography } fro
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { AvailableLanguagesType, AvailbaleLanguages } from "../../../shared/i18n/i18n";
 import { setLanguage } from "../store/languageSlice";
+import { useTranslation } from "react-i18next";
 
 export function MobileLanguageSwitcher() {
+  const { t } = useTranslation("mobile language switcher");
+
   const language = useAppSelector((state) => state.LanguageReducer.language);
   const dispatch = useAppDispatch();
 
@@ -21,7 +24,7 @@ export function MobileLanguageSwitcher() {
     <>
       <ListItemText>
         <Typography sx={{ fontWeight: 700, letterSpacing: 1.7 }} variant="h5">
-          Language
+          {t("language")}
         </Typography>
       </ListItemText>
 

@@ -3,6 +3,9 @@ import { Box, BoxProps, Divider, styled, useTheme } from "@mui/material";
 import { Button, Logo } from "../../shared/components";
 import { DefaultThemeSwitcher } from "../../modules/theme-module";
 import AppSettingsMobile from "./AppSettingsMobile";
+import { DefaultLanguageSwitcher } from "../../modules/langualge-module";
+import { useTranslation } from "react-i18next";
+import i18n from "../../shared/i18n/i18n";
 
 const HeaderContainerSX = {
   display: "flex",
@@ -35,6 +38,7 @@ const PCSettingsContainerSX = styled(Box)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const { t } = useTranslation("header");
   return (
     <>
       <Box sx={HeaderContainerSX}>
@@ -44,11 +48,12 @@ export default function Header() {
             <AppSettingsMobile />
           </MobileSettingsContainerSX>
           <PCSettingsContainerSX>
+            <DefaultLanguageSwitcher />
             <DefaultThemeSwitcher />
           </PCSettingsContainerSX>
           <Box sx={HeaderLoginContainerSX}>
             <Button variant="contained" size="small">
-              Login
+              {t("login")}
             </Button>
           </Box>
         </Box>
