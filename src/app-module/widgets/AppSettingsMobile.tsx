@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Drawer, IconButton, List, ListItem } from "@mui/material";
+import { Drawer, IconButton, List, ListItem, styled } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { useTheme } from "@emotion/react";
 import { MobileThemeSwitcher } from "../../modules/theme-module";
+import { MobileLanguageSwitcher } from "../../modules/langualge-module";
+
+const AppSettingsListItem = styled(ListItem)(() => ({
+  px: 5,
+}));
 
 export default function AppSettingsMobile() {
-  const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
@@ -29,9 +32,12 @@ export default function AppSettingsMobile() {
         }}
       >
         <List>
-          <ListItem sx={{ px: 5 }}>
+          <AppSettingsListItem>
             <MobileThemeSwitcher />
-          </ListItem>
+          </AppSettingsListItem>
+          <AppSettingsListItem>
+            <MobileLanguageSwitcher />
+          </AppSettingsListItem>
         </List>
       </Drawer>
     </>
