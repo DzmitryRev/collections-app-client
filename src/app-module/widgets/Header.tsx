@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, BoxProps, Divider, styled, useTheme } from "@mui/material";
+import { Box, Divider, styled } from "@mui/material";
 import { Button, Logo } from "../../shared/components";
 import { DefaultThemeSwitcher } from "../../modules/theme-module";
 import AppSettingsMobile from "./AppSettingsMobile";
 import { DefaultLanguageSwitcher } from "../../modules/langualge-module";
 import { useTranslation } from "react-i18next";
-import i18n from "../../shared/i18n/i18n";
 
 const HeaderContainerSX = {
   display: "flex",
