@@ -6,5 +6,8 @@ export const en = {
     ["mobile language switcher"]: {
       language: "Language",
     },
+    ["mobile theme switcher"]: {
+      ["dark mode"]: "Dark mode",
+    },
   },
 };
