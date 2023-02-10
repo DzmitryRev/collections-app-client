@@ -5,6 +5,6 @@
 
 export const rootFontsStyle = {
   typography: {
-    fontFamily: ['"Segoe UI Emoji"', '"Segoe UI Symbol"', "sans-serif"].join(","),
+    fontFamily: ["Open Sans", "sans-serif"].join(","),
   },
 };
