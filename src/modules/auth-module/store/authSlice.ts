@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/store";
+import { loginThunk } from "./thunks/login.thunk";
+import { registrationThunk } from "./thunks/registration.thunk";
 
 interface AuthState {
   isAuth: boolean;
   userId: string;
   loading: boolean;
-  error: null;
+  errors: string[];
   token: string | null;
-  success: boolean;
 }
 
 const token = localStorage.getItem("token") ? localStorage.getItem("token") : null;
@@ -18,53 +17,43 @@ const initialState: AuthState = {
   userId: "",
   token,
   loading: false,
-  error: null,
-  success: false,
+  errors: [],
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    // setIsAuth: (state, action: PayloadAction<boolean>) => {
-    //   state.isAuth = action.payload;
-    // },
-    // setUserId: (state, action: PayloadAction<string>) => {
-    //   state.userId = action.payload;
-    // },
-  },
-  extraReducers: {
-    // [loginThunk.pending]: (state) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // },
-    // [loginThunk.fulfilled]: (state, { payload }) => {
-    //   state.loading = false;
-    //   state.userId = payload;
-    //   state.token = payload.userToken;
-    // },
-    // [loginThunk.rejected]: (state, { payload }) => {
-    //   state.loading = false;
-    //   state.error = payload;
-    // },
-    // [registrationThunk.pending]: (state) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // },
-    // [registrationThunk.fulfilled]: (state, { payload }) => {
-    //   state.loading = false;
-    //   //   state.userId = payload;
-    //   //   state.token = payload.userToken;
-    // },
-    // [registrationThunk.rejected]: (state, { payload }) => {
-    //   state.loading = false;
-    //   state.error = payload;
-    // },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(registrationThunk.pending, (state) => {
+      state.loading = true;
+      state.errors = [];
+    });
+    builder.addCase(registrationThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
+    });
+    builder.addCase(registrationThunk.rejected, (state, { payload }) => {
+      state.loading = false;
+      if (payload) {
+        state.errors = payload;
+      }
+    });
+    builder.addCase(loginThunk.pending, (state) => {
+      state.loading = true;
+      state.errors = [];
+    });
+    builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
+    });
+    builder.addCase(loginThunk.rejected, (state, { payload }) => {
+      state.loading = false;
+      if (payload) {
+        state.errors = payload;
+      }
+    });
   },
 });
 
-export const { setIsAuth, setUserId } = authSlice.actions;
+export const {} = authSlice.actions;
 
-// export const selectAuth = (state: RootState) => state.auth;
-
-export default authSlice.reducer;
+export const AuthReducer = authSlice.reducer;
