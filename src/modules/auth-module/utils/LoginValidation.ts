@@ -6,6 +6,6 @@ export const loginInitialValue = {
 };
 
 export const loginValidationSchema = yup.object({
-  email: yup.string().email("Enter a valid email").required("Required field"),
-  password: yup.string().required("Required field").min(6),
+  email: yup.string().email("enter_valid_email").required("required_field"),
+  password: yup.string().required("required_field").min(6, "password_valid_error"),
 });
