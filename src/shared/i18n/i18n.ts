@@ -3,21 +3,21 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { en, ru } from "./translations";
 
-export const AvailbaleLanguages = {
+export const availbaleLanguages = {
   ...ru,
   ...en,
 };
 
-export type AvailableLanguagesType = keyof typeof AvailbaleLanguages;
+export type AvailableLanguagesType = keyof typeof availbaleLanguages;
 
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
     fallbackLng: "en",
-    debug: true,
+    // debug: true,
     resources: {
-      ...AvailbaleLanguages,
+      ...availbaleLanguages,
     },
   });
 
