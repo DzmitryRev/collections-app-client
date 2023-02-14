@@ -9,14 +9,14 @@ export type ValidatedInputPropsType = {
 } & TextFieldProps;
 
 export function ValidatedInput({ label, touched, errors, ...args }: ValidatedInputPropsType) {
-  const { t } = useTranslation("translation");
+  const { t } = useTranslation(["global", "auth"]);
   return (
     <div>
       <TextField
         label={t(label)}
         name={label.toLowerCase()}
         error={touched && !!errors}
-        helperText={t(errors || "") || " "}
+        helperText={(touched && t(errors || "", { ns: "auth" })) || " "}
         {...args}
       />
     </div>
