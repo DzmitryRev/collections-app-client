@@ -17,6 +17,7 @@ export function ValidatedInput({ label, touched, errors, ...args }: ValidatedInp
         name={label.toLowerCase()}
         error={touched && !!errors}
         helperText={(touched && t(errors || "", { ns: "auth" })) || " "}
+        autoComplete="off"
         {...args}
       />
     </div>
