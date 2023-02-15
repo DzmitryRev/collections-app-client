@@ -16,7 +16,9 @@ export function AuthInformationWidget({
     <Box sx={{ textAlign: "center" }}>
       <Box sx={{ mb: 1 }}>{children}</Box>
       <SecondaryHeadingTypo sx={{ mb: 1 }}>{title}</SecondaryHeadingTypo>
-      <BodyTypo>{body}</BodyTypo>
+      <Box sx={{ maxWidth: "380px", m: "0 auto" }}>
+        <BodyTypo>{body}</BodyTypo>
+      </Box>
     </Box>
   );
 }
