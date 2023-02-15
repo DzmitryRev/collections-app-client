@@ -30,6 +30,10 @@ export const loginRequest = ({ email, password }: LoginBodyType) => {
   );
 };
 
+export const logoutRequest = () => {
+  return axios.post<MessageResType>(`${BACKEND_URL}/api/logout`, {}, { withCredentials: true });
+};
+
 export const checkAuthRequest = () => {
   return axios.get<LoginResType>(`${BACKEND_URL}/api/refresh`, { withCredentials: true });
 };

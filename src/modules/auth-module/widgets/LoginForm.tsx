@@ -12,7 +12,7 @@ import {
 import { loginInitialValue, loginValidationSchema } from "../utils/LoginValidation";
 import { REGISTRATION } from "../../../shared/constants/paths";
 import AuthApiErrorsList from "./AuthApiErrorBlock";
-import { useAuth } from "../hooks";
+import { useAuth } from "../hooks/useAuth";
 import { loginThunk } from "../store";
 
 export function LoginForm() {
@@ -40,7 +40,7 @@ export function LoginForm() {
 
         <Box marginBottom={2}>
           <form onSubmit={formik.handleSubmit}>
-            <AuthValidatedInput 
+            <AuthValidatedInput
               label={"email"}
               touched={formik.touched.email}
               errors={formik.errors.email}

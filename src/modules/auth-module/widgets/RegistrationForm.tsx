@@ -15,7 +15,7 @@ import {
 } from "../components";
 import { CONFIRM_EMAIL, LOGIN } from "../../../shared/constants/paths";
 import AuthApiErrorsList from "./AuthApiErrorBlock";
-import { useAuth } from "../hooks";
+import { useAuth } from "../hooks/useAuth";
 import { registrationThunk } from "../store";
 
 export default function RegistrationForm() {
