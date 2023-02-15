@@ -5,3 +5,4 @@ export * from "./ChildrenOrSpinner";
 export * from "./CustomLink";
 export * from "./LightTypo";
 export * from "./SecondaryHeadingTypo";
+export * from "./BodyTypo";
