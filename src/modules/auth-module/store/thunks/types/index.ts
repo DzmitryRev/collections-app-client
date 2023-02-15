@@ -1,2 +1,2 @@
 export * from "./authError.type";
-export * from "./authResReturn.type";
+export * from "./authRejectValue.type";

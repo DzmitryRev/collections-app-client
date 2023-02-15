@@ -1,19 +1,17 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LoginBodyType, loginRequest } from "../../api/api";
+import { LoginBodyType, loginRequest, LoginResType } from "../../api";
 import { createAuthApiError } from "./helpers";
-import { AuthErrorType } from "./types";
+import { AuthRejectValueType, AuthErrorType } from "./types";
 
 export const loginThunk = createAsyncThunk<
-  {},
+  LoginResType | undefined,
   LoginBodyType,
-  {
-    rejectValue: string[];
-  }
->("auth/login", async ({ email, password }: LoginBodyType, { rejectWithValue }) => {
+  AuthRejectValueType
+>("auth/login", async ({ email, password }, { rejectWithValue }) => {
   try {
-    const res = await loginRequest({ email, password });
-    return res.data;
+    const { data } = await loginRequest({ email, password });
+    return data;
   } catch (error) {
     if (axios.isAxiosError<AuthErrorType>(error)) {
       return rejectWithValue(createAuthApiError(error?.response?.data));
