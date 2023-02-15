@@ -20,8 +20,16 @@ export type LoginBodyType = {
 export type LoginResType = { accessToken: string; userId: string };
 
 export const loginRequest = ({ email, password }: LoginBodyType) => {
-  return axios.post<LoginResType>(`${BACKEND_URL}/api/login`, {
-    email,
-    password,
-  });
+  return axios.post<LoginResType>(
+    `${BACKEND_URL}/api/login`,
+    {
+      email,
+      password,
+    },
+    { withCredentials: true }
+  );
+};
+
+export const checkAuthRequest = () => {
+  return axios.get<LoginResType>(`${BACKEND_URL}/api/refresh`, { withCredentials: true });
 };

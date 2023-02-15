@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ACCESS_TOKEN_STORAGE } from "../../../shared/constants/localStorage";
+import { checkAuthThunk } from "./thunks/checkAuth.thunk";
 import { loginThunk } from "./thunks/login.thunk";
 import { registrationThunk } from "./thunks/registration.thunk";
 
@@ -62,6 +63,14 @@ export const authSlice = createSlice({
       state.loading = false;
       if (payload) {
         state.errors = payload;
+      }
+    });
+    builder.addCase(checkAuthThunk.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.isAuth = true;
+        localStorage.setItem(ACCESS_TOKEN_STORAGE, payload.accessToken);
+        state.token = payload.accessToken;
+        state.userId = payload.userId;
       }
     });
   },
