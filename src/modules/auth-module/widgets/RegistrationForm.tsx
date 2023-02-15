@@ -29,7 +29,9 @@ export default function RegistrationForm() {
       dispatch(registrationThunk(values))
         .unwrap()
         .then(() => {
-          navigate(CONFIRM_EMAIL);
+          navigate(CONFIRM_EMAIL, {
+            state: { access: true },
+          });
         });
     },
   });

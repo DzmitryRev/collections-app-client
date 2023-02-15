@@ -10,7 +10,7 @@ import {
   AuthValidatedInput,
 } from "../components";
 import { loginInitialValue, loginValidationSchema } from "../utils/LoginValidation";
-import { REGISTRATION } from "../../../shared/constants/paths";
+import { MAIN, REGISTRATION } from "../../../shared/constants/paths";
 import AuthApiErrorsList from "./AuthApiErrorBlock";
 import { useAuth } from "../hooks/useAuth";
 import { loginThunk } from "../store";
@@ -26,7 +26,7 @@ export function LoginForm() {
       dispatch(loginThunk(values))
         .unwrap()
         .then(() => {
-          navigate("/");
+          navigate(MAIN);
         });
     },
   });
