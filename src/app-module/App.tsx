@@ -8,14 +8,11 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ maxWidth: "1198px", m: "0 auto" }}>
+      <Box sx={{ maxWidth: "1198px", minHeight: "100vh", m: "0 auto" }}>
         <Header />
-        {/**
-         * TODO:
-         * router outlet
-         * footer
-         */}
-         <Router />
+        <Box sx={{ px: "5px", pt: "30px", pb: "20px" }}>
+          <Router />
+        </Box>
       </Box>
     </>
   );

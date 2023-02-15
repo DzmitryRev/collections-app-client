@@ -1,12 +1,12 @@
 import React from "react";
 import { ListItemText, Switch, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { AvailableLanguagesType, AvailbaleLanguages } from "../../../shared/i18n/i18n";
+import { AvailableLanguagesType, availbaleLanguages } from "../../../shared/i18n/i18n";
 import { setLanguage } from "../store/languageSlice";
 import { useTranslation } from "react-i18next";
 
 export function MobileLanguageSwitcher() {
-  const { t } = useTranslation("mobile language switcher");
+  const { t } = useTranslation("personalization");
 
   const language = useAppSelector((state) => state.LanguageReducer.language);
   const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ export function MobileLanguageSwitcher() {
       dispatch(setLanguage(newLanguage));
     }
   };
-  const availableLanguagesLang = Object.keys(AvailbaleLanguages);
+  const availableLanguagesLang = Object.keys(availbaleLanguages);
   return (
     <>
       <ListItemText>

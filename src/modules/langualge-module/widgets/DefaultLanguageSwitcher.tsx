@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Menu, MenuItem } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setLanguage } from "../store/languageSlice";
-import { AvailableLanguagesType, AvailbaleLanguages } from "../../../shared/i18n/i18n";
+import { AvailableLanguagesType, availbaleLanguages } from "../../../shared/i18n/i18n";
 import { Button } from "../../../shared/components";
 
 export function DefaultLanguageSwitcher() {
@@ -26,7 +26,7 @@ export function DefaultLanguageSwitcher() {
     handleClose();
   };
 
-  const availableLanguagesLang = Object.keys(AvailbaleLanguages).filter(
+  const availableLanguagesLang = Object.keys(availbaleLanguages).filter(
     (lang) => lang !== language
   );
 

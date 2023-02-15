@@ -1,10 +1,12 @@
 import React from "react";
 import { Box, Divider, styled } from "@mui/material";
-import { Button, Logo } from "../../shared/components";
-import { DefaultThemeSwitcher } from "../../modules/theme-module";
-import AppSettingsMobile from "./AppSettingsMobile";
-import { DefaultLanguageSwitcher } from "../../modules/langualge-module";
 import { useTranslation } from "react-i18next";
+import { DefaultLanguageSwitcher } from "../../modules/langualge-module";
+import { DefaultThemeSwitcher } from "../../modules/theme-module";
+import { Button, Logo } from "../../shared/components";
+import { CustomLink } from "../../shared/components/CustomLink";
+import { LOGIN } from "../../shared/constants/paths";
+import AppSettingsMobile from "./AppSettingsMobile";
 
 const HeaderContainerSX = {
   display: "flex",
@@ -37,7 +39,8 @@ const PCSettingsContainerSX = styled(Box)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const { t } = useTranslation("header");
+  const { t } = useTranslation("global");
+
   return (
     <>
       <Box sx={HeaderContainerSX}>
@@ -51,9 +54,11 @@ export default function Header() {
             <DefaultThemeSwitcher />
           </PCSettingsContainerSX>
           <Box sx={HeaderLoginContainerSX}>
-            <Button variant="contained" size="small">
-              {t("login")}
-            </Button>
+            <CustomLink to={LOGIN}>
+              <Button variant="contained" size="small">
+                {t("login")}
+              </Button>
+            </CustomLink>
           </Box>
         </Box>
       </Box>
