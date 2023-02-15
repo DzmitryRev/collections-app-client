@@ -27,13 +27,14 @@ export function AuthFormPasswordInput({ errors, touched, ...args }: IPasswordInp
   };
 
   return (
-    <FormControl variant="filled" fullWidth {...args}>
+    <FormControl variant="filled" fullWidth error={touched && !!errors} {...args}>
       <InputLabel htmlFor="filled-adornment-password">{t("password")}</InputLabel>
 
       <FilledInput
         name="password"
         id="filled-adornment-password"
         type={showPassword ? "text" : "password"}
+        size="small"
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -46,9 +47,7 @@ export function AuthFormPasswordInput({ errors, touched, ...args }: IPasswordInp
           </InputAdornment>
         }
       />
-      <FormHelperText error={touched && !!errors}>
-        {(touched && t(errors || "", { ns: "auth" })) || " "}
-      </FormHelperText>
+      <FormHelperText>{(touched && t(errors || "", { ns: "auth" })) || " "}</FormHelperText>
     </FormControl>
   );
 }
