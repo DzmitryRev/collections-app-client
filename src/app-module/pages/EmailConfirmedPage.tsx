@@ -2,13 +2,14 @@ import React from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { AuthInformationWidget } from "../../modules/auth-module";
 import { Button, CustomLink } from "../../shared/components";
-import { MAIN } from "../../shared/constants/paths";
+import { LOGIN } from "../../shared/constants/paths";
 import { Box } from "@mui/material";
+import { ProtectedPageByParams } from "../Hocs/ProtectedPageByParams";
 
 export default function EmailConfirmedPage() {
   return (
-    <>
-      <Box sx={{mb: 2}}>
+    <ProtectedPageByParams>
+      <Box sx={{ mb: 2 }}>
         <AuthInformationWidget
           title="Email successfully verified"
           body="Thank you for registering on our website. Now you can create collections."
@@ -17,12 +18,12 @@ export default function EmailConfirmedPage() {
         </AuthInformationWidget>
       </Box>
       <Box sx={{ textAlign: "center" }}>
-        <CustomLink to={MAIN}>
+        <CustomLink to={LOGIN}>
           <Button variant="contained" size="small">
-            Go to main page
+            login
           </Button>
         </CustomLink>
       </Box>
-    </>
+    </ProtectedPageByParams>
   );
 }
