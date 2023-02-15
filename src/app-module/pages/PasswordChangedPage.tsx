@@ -6,13 +6,13 @@ import { LOGIN } from "../../shared/constants/paths";
 import { Box } from "@mui/material";
 import { ProtectedPageByParams } from "../Hocs/ProtectedPageByParams";
 
-export function EmailConfirmedPage() {
+export function PasswordChangedPage() {
   return (
     <ProtectedPageByParams>
       <Box sx={{ mb: 2 }}>
         <AuthInformationWidget
-          title="Email successfully verified"
-          body="Thank you for registering on our website. Now you can create collections."
+          title="Password changed"
+          body="Now you can log in to you account with new password"
         >
           <CheckCircleIcon sx={{ fontSize: "50px" }} />
         </AuthInformationWidget>

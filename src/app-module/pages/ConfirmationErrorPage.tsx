@@ -3,7 +3,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { AuthInformationWidget } from "../../modules/auth-module";
 import { ProtectedPageByParams } from "../Hocs/ProtectedPageByParams";
 
-export default function ConfirmationErrorPage() {
+export function ConfirmationErrorPage() {
   return (
     <ProtectedPageByParams>
       <AuthInformationWidget

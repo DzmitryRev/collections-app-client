@@ -6,7 +6,7 @@ import { SecondaryHeadingTypo } from "../../shared/components";
 import { useTranslation } from "react-i18next";
 import { RedirectIfAuth } from "../Hocs/RedirectIfAuth";
 
-export default function RegistrationPage() {
+export function RegistrationPage() {
   const { t } = useTranslation("headings");
   return (
     <RedirectIfAuth>
