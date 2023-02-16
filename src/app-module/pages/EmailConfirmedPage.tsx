@@ -4,11 +4,10 @@ import { AuthInformationWidget } from "../../modules/auth-module";
 import { Button, CustomLink } from "../../shared/components";
 import { LOGIN } from "../../shared/constants/paths";
 import { Box } from "@mui/material";
-import { ProtectedPageByParams } from "../Hocs/ProtectedPageByParams";
 
 export function EmailConfirmedPage() {
   return (
-    <ProtectedPageByParams>
+    <>
       <Box sx={{ mb: 2 }}>
         <AuthInformationWidget
           title="Email successfully verified"
@@ -24,6 +23,6 @@ export function EmailConfirmedPage() {
           </Button>
         </CustomLink>
       </Box>
-    </ProtectedPageByParams>
+    </>
   );
 }
