@@ -6,6 +6,8 @@ export const en = {
       password: "Password",
       email: "Email",
       name: "Name",
+      logout: "Logout",
+      confirm: "Confirm",
     },
     personalization: {
       dark_mode: "Dark mode",
@@ -23,6 +25,19 @@ export const en = {
     headings: {
       login_into_account: "Login into your account",
       create_account: "Create an account",
+      enter_your_email: "Enter your email",
+    },
+    informationPages: {
+      invalid_link: "Invalid link",
+      invalid_link_body: "The link is incorrect. The link may have expired.",
+      check_your_email: "Check your email",
+      confirm_email_body: "We sent you a quick email to sign in at your email",
+      email_verified: "Email successfully verified",
+      email_verified_body:
+        "Thank you for registering on our website. Now you can create collections.",
+      new_password_sent: "New password has been sent to your email",
+      password_changed: "Password changed",
+      password_changed_body: "Now you can log in to you account with new password",
     },
   },
 };

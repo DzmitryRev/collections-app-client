@@ -9,7 +9,7 @@ export function ForgotPassword() {
   return (
     <Box>
       <SecondaryHeadingTypo sx={{ textAlign: "center", mb: 2 }}>
-        Confirm you email
+        {t("enter_your_email")}
       </SecondaryHeadingTypo>
       <ForgotPasswordForm />
     </Box>

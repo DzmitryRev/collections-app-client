@@ -71,7 +71,7 @@ export default function Header() {
             )}
           </Box>
           <Button variant="contained" size="small" onClick={logout}>
-            logout
+            {t("logout")}
           </Button>
         </Box>
       </Box>

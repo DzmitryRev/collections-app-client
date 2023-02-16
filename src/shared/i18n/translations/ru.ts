@@ -6,6 +6,8 @@ export const ru = {
       password: "Пароль",
       email: "Почта",
       name: "Имя",
+      logout: "Выйти",
+      confirm: "Подтвердить",
     },
     personalization: {
       dark_mode: "Темная тема",
@@ -23,6 +25,18 @@ export const ru = {
     headings: {
       login_into_account: "Войти в аккаунт",
       create_account: "Создать аккаунт",
+      enter_your_email: "Введите Ваш email",
+    },
+    informationPages: {
+      invalid_link: "Неправильная ссылка",
+      invalid_link_body: "Ссылка работает некорректно. Возмонжо время жизни ссылки истекло.",
+      check_your_email: "Проверьте вашу почту",
+      confirm_email_body: "Мы отправили небольшое письмо для подтвержения почты",
+      email_verified: "Почта успешно подтверждена",
+      email_verified_body: "Спасибо за регистрацию, теперь Вы можете создавать коллекции",
+      new_password_sent: "Новый пароль был отправлен на Ваш email",
+      password_changed: "Пароль изменен",
+      password_changed_body: "Войдите в Ваш аккаунт с помощью нового пароля",
     },
   },
 };

@@ -1,13 +1,12 @@
 import React from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import { AuthInformationWidget } from "../../modules/auth-module";
+import { useTranslation } from "react-i18next";
 
 export function ConfirmEmailPage() {
+  const { t } = useTranslation("informationPages");
   return (
-    <AuthInformationWidget
-      title="Check your email"
-      body="We sent you a quick email to sign in at your email"
-    >
+    <AuthInformationWidget title={t("check_your_email")} body={t("confirm_email_body")}>
       <EmailIcon sx={{ fontSize: "50px" }} />
     </AuthInformationWidget>
   );

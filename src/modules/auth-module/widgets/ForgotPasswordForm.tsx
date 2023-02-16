@@ -14,7 +14,7 @@ import {
 import { forgotPasswordThunk } from "../store/thunks/forgotPassword.thunk";
 
 export function ForgotPasswordForm() {
-  const { t } = useTranslation(["auth", "global"]);
+  const { t } = useTranslation("global");
   const { loading, errors, dispatch, navigate } = useAuth();
 
   const formik = useFormik({
@@ -43,7 +43,7 @@ export function ForgotPasswordForm() {
               onChange={formik.handleChange}
             />
             <ChildrenOrSpinner sx={{ textAlign: "center" }} condition={loading}>
-              <AuthSubmitButton>confirm</AuthSubmitButton>
+              <AuthSubmitButton>{t("confirm")}</AuthSubmitButton>
             </ChildrenOrSpinner>
           </form>
         </Box>
