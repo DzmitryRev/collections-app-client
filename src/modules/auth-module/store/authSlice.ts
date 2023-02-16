@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { UserType } from "../../../shared/api";
 import { ACCESS_TOKEN_STORAGE } from "../../../shared/constants/localStorage";
 import { checkAuthThunk } from "./thunks/checkAuth.thunk";
 import { loginThunk } from "./thunks/login.thunk";
@@ -6,15 +7,13 @@ import { logoutThunk } from "./thunks/logout.thunk";
 import { registrationThunk } from "./thunks/registration.thunk";
 
 interface AuthState {
-  isAuth: boolean;
-  userId: string;
+  user: UserType | null;
   loading: boolean;
   errors: string[];
 }
 
 const initialState: AuthState = {
-  isAuth: false,
-  userId: "",
+  user: null,
   loading: false,
   errors: [],
 };
@@ -48,9 +47,8 @@ export const authSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
       if (payload) {
         state.loading = false;
-        state.isAuth = true;
         localStorage.setItem(ACCESS_TOKEN_STORAGE, payload.accessToken);
-        state.userId = payload.userId;
+        state.user = payload.user;
       }
     });
     builder.addCase(loginThunk.rejected, (state, { payload }) => {
@@ -61,15 +59,13 @@ export const authSlice = createSlice({
     });
     builder.addCase(checkAuthThunk.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.isAuth = true;
         localStorage.setItem(ACCESS_TOKEN_STORAGE, payload.accessToken);
-        state.userId = payload.userId;
+        state.user = payload.user;
       }
     });
     builder.addCase(logoutThunk.fulfilled, (state, { payload }) => {
-      state.isAuth = false;
       localStorage.removeItem(ACCESS_TOKEN_STORAGE);
-      state.userId = "";
+      state.user = null;
     });
   },
 });

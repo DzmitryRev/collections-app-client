@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MessageResType } from "../../../shared/api";
+import { MessageResType, UserType } from "../../../shared/api";
 import { BACKEND_URL } from "../../../shared/constants/backend";
 
 export type RegistrationBodyType = {
@@ -17,7 +17,7 @@ export type LoginBodyType = {
   password: string;
 };
 
-export type LoginResType = { accessToken: string; userId: string };
+export type LoginResType = { accessToken: string; user: UserType };
 
 export const loginRequest = ({ email, password }: LoginBodyType) => {
   return axios.post<LoginResType>(
