@@ -10,10 +10,10 @@ import {
   AuthValidatedInput,
 } from "../components";
 import { loginInitialValue, loginValidationSchema } from "../utils/LoginValidation";
-import { MAIN, REGISTRATION } from "../../../shared/constants/paths";
+import { FORGOT_PASSWORD, MAIN, REGISTRATION } from "../../../shared/constants/paths";
 import AuthApiErrorsList from "./AuthApiErrorBlock";
 import { useAuth } from "../hooks/useAuth";
-import { loginThunk } from "../store";
+import { loginThunk } from "../store/thunks/login.thunk";
 
 export function LoginForm() {
   const { t } = useTranslation(["auth", "global"]);
@@ -54,7 +54,7 @@ export function LoginForm() {
             />
 
             <LightTypo sx={{ mb: 2 }}>
-              <CustomLink to="/registration">{t("forgot_password")}</CustomLink>
+              <CustomLink to={FORGOT_PASSWORD}>{t("forgot_password")}</CustomLink>
             </LightTypo>
 
             <ChildrenOrSpinner sx={{ textAlign: "center" }} condition={loading}>

@@ -16,7 +16,7 @@ import {
 import { CONFIRM_EMAIL, LOGIN } from "../../../shared/constants/paths";
 import AuthApiErrorsList from "./AuthApiErrorBlock";
 import { useAuth } from "../hooks/useAuth";
-import { registrationThunk } from "../store";
+import { registrationThunk } from "../store/thunks/registration.thunk";
 
 export default function RegistrationForm() {
   const { t } = useTranslation(["global", "auth"]);

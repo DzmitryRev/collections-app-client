@@ -5,3 +5,4 @@ export * from "./NewPasswordSentPage";
 export * from "./PasswordChangedPage";
 export * from "./LoginPage";
 export * from "./RegistrationPage";
+export * from "./ForgotPassword";

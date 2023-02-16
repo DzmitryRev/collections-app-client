@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import {
   CONFIRM_EMAIL,
   EMAIL_CONFIRMED,
+  FORGOT_PASSWORD,
   LOGIN,
   NEW_PASSWORD_SENT,
   PASSWORD_CHANHED,
@@ -20,6 +21,7 @@ import {
   NewPasswordSentPage,
   PasswordChangedPage,
   RegistrationPage,
+  ForgotPassword,
 } from "../pages";
 
 export default function Router() {
@@ -79,6 +81,14 @@ export default function Router() {
         element={
           <RedirectIfAuth>
             <LoginPage />
+          </RedirectIfAuth>
+        }
+      />
+      <Route
+        path={FORGOT_PASSWORD}
+        element={
+          <RedirectIfAuth>
+            <ForgotPassword />
           </RedirectIfAuth>
         }
       />

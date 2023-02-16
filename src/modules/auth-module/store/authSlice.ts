@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { UserType } from "../../../shared/api";
 import { ACCESS_TOKEN_STORAGE } from "../../../shared/constants/localStorage";
 import { checkAuthThunk } from "./thunks/checkAuth.thunk";
+import { forgotPasswordThunk } from "./thunks/forgotPassword.thunk";
 import { loginThunk } from "./thunks/login.thunk";
 import { logoutThunk } from "./thunks/logout.thunk";
 import { registrationThunk } from "./thunks/registration.thunk";
@@ -66,6 +67,19 @@ export const authSlice = createSlice({
     builder.addCase(logoutThunk.fulfilled, (state, { payload }) => {
       localStorage.removeItem(ACCESS_TOKEN_STORAGE);
       state.user = null;
+    });
+    builder.addCase(forgotPasswordThunk.pending, (state) => {
+      state.loading = true;
+      state.errors = [];
+    });
+    builder.addCase(forgotPasswordThunk.fulfilled, (state, { payload }) => {
+      state.loading = false;
+    });
+    builder.addCase(forgotPasswordThunk.rejected, (state, { payload }) => {
+      state.loading = false;
+      if (payload) {
+        state.errors = payload;
+      }
     });
   },
 });
