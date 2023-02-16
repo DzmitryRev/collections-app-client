@@ -7,6 +7,8 @@ import { Button, Logo } from "../../shared/components";
 import { CustomLink } from "../../shared/components/CustomLink";
 import { LOGIN } from "../../shared/constants/paths";
 import AppSettingsMobile from "./AppSettingsMobile";
+import { useAppSelector } from "../../store/hooks";
+import { useLogout } from "../../modules/auth-module";
 
 const HeaderContainerSX = {
   display: "flex",
@@ -41,6 +43,10 @@ const PCSettingsContainerSX = styled(Box)(({ theme }) => ({
 export default function Header() {
   const { t } = useTranslation("global");
 
+  const { logout } = useLogout();
+
+  const { user } = useAppSelector((store) => store.AuthReducer);
+
   return (
     <>
       <Box sx={HeaderContainerSX}>
@@ -54,12 +60,19 @@ export default function Header() {
             <DefaultThemeSwitcher />
           </PCSettingsContainerSX>
           <Box sx={HeaderLoginContainerSX}>
-            <CustomLink to={LOGIN}>
-              <Button variant="contained" size="small">
-                {t("login")}
-              </Button>
-            </CustomLink>
+            {user ? (
+              <>{user.name}</>
+            ) : (
+              <CustomLink to={LOGIN}>
+                <Button variant="contained" size="small">
+                  {t("login")}
+                </Button>
+              </CustomLink>
+            )}
           </Box>
+          <Button variant="contained" size="small" onClick={logout}>
+            logout
+          </Button>
         </Box>
       </Box>
       <Divider />

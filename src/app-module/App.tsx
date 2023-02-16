@@ -3,8 +3,10 @@ import Box from "@mui/material/Box";
 import { CssBaseline } from "@mui/material";
 import Router from "./router/Router";
 import Header from "./widgets/Header";
+import { useCheckAuth } from "../modules/auth-module";
 
 function App() {
+  useCheckAuth();
   return (
     <>
       <CssBaseline />

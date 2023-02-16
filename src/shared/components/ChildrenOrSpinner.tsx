@@ -6,6 +6,5 @@ interface IChildrenOrSpinnerProps extends BoxProps {
 }
 
 export function ChildrenOrSpinner({ condition, children, ...args }: IChildrenOrSpinnerProps) {
-  console.log(condition);
   return <Box {...args}>{condition ? <CircularProgress /> : children}</Box>;
 }
