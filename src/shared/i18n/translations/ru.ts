@@ -38,5 +38,12 @@ export const ru = {
       password_changed: "Пароль изменен",
       password_changed_body: "Войдите в Ваш аккаунт с помощью нового пароля",
     },
+    apiErrors: {
+      user_exist: "Пользователь с таким email уже существует",
+      user_blocked: "Пользователь заблокирован",
+      email_not_activated: "Email не активирован",
+      invalid_password: "Неверный пароль",
+      user_not_found: "Такого пользователя не существует",
+    },
   },
 };

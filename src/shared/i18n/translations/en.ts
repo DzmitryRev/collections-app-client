@@ -39,5 +39,12 @@ export const en = {
       password_changed: "Password changed",
       password_changed_body: "Now you can log in to you account with new password",
     },
+    apiErrors: {
+      user_exist: "User is already exist",
+      user_blocked: "User blocked",
+      email_not_activated: "Email not activated",
+      invalid_password: "Invalid password",
+      user_not_found: "User not found",
+    },
   },
 };
