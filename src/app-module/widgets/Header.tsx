@@ -7,7 +7,7 @@ import { Button, Logo } from "../../shared/components";
 import { CustomLink } from "../../shared/components/CustomLink";
 import { LOGIN, MAIN } from "../../shared/constants/paths";
 import AppSettingsMobile from "./AppSettingsMobile";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store";
 import { useLogout } from "../../modules/auth-module";
 
 const HeaderContainerSX = {

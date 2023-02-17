@@ -1,6 +1,6 @@
 import React from "react";
 import { ListItemText, Switch, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { toggleTheme } from "../store/themeSlice";
 import { useTranslation } from "react-i18next";
 

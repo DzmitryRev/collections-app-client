@@ -1,6 +1,6 @@
 import React from "react";
 import { ListItemText, Switch, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { AvailableLanguagesType, availbaleLanguages } from "../../../shared/i18n/i18n";
 import { setLanguage } from "../store/languageSlice";
 import { useTranslation } from "react-i18next";

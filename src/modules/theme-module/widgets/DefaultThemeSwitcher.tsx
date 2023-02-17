@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton } from "@mui/material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { toggleTheme } from "../store/themeSlice";
 
 export function DefaultThemeSwitcher() {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { dispatch } from "../../../store/";
-import { setIsError } from "../store/ConnectionErrorSlice";
+import { setIsError } from "../store/connectionErrorSlice";
 
 // this extension use to catch global errors (server or db errors)
 

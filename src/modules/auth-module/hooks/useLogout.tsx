@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { logoutThunk } from "../store/thunks/logout.thunk";
 
 export function useLogout() {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, MenuItem } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { setLanguage } from "../store/languageSlice";
 import { AvailableLanguagesType, availbaleLanguages } from "../../../shared/i18n/i18n";
 import { Button } from "../../../shared/components";
