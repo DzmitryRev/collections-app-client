@@ -6,6 +6,6 @@ interface ILinkProps extends LinkProps {
   to: string;
 }
 
-export function CustomLink({ to, ...args }: ILinkProps) {
-  return <Link component={RouterLink} to={to} {...args} />;
+export function CustomLink({ to, sx, ...args }: ILinkProps) {
+  return <Link component={RouterLink} to={to} sx={{ textDecoration: "none", ...sx }} {...args} />;
 }
