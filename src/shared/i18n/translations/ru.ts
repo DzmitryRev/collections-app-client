@@ -45,5 +45,8 @@ export const ru = {
       invalid_password: "Неверный пароль",
       user_not_found: "Такого пользователя не существует",
     },
+    alerts: {
+      server_unavailable: "Сервер сейчас недоступен. Приносим свои извенения.",
+    },
   },
 };

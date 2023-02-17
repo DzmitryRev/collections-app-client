@@ -46,5 +46,8 @@ export const en = {
       invalid_password: "Invalid password",
       user_not_found: "User not found",
     },
+    alerts: {
+      server_unavailable: "The server is currently unavailable. We bring our apologies.",
+    },
   },
 };
