@@ -10,11 +10,20 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ maxWidth: "1198px", minHeight: "100vh", m: "0 auto" }}>
+      <Box
+        sx={{
+          maxWidth: "1198px",
+          minHeight: "100vh",
+          m: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Header />
-        <Box sx={{ px: "5px", pt: "30px", pb: "20px" }}>
+        <Box sx={{ px: "5px", pt: "30px", pb: "20px", flex: "1 1 auto" }}>
           <Router />
         </Box>
+        <Box sx={{ background: "red" }}>footer</Box>
       </Box>
     </>
   );
