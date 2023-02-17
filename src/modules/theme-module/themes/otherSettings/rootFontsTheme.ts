@@ -5,6 +5,6 @@
 
 export const rootFontsStyle = {
   typography: {
-    fontFamily: ["Open Sans", "sans-serif"].join(","),
+    fontFamily: ["Inter", "sans-serif"].join(","),
   },
 };
