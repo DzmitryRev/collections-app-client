@@ -5,12 +5,13 @@ import { DefaultLanguageSwitcher } from "../../modules/langualge-module";
 import { DefaultThemeSwitcher } from "../../modules/theme-module";
 import { Button, Logo } from "../../shared/components";
 import { CustomLink } from "../../shared/components/CustomLink";
-import { LOGIN } from "../../shared/constants/paths";
+import { LOGIN, MAIN } from "../../shared/constants/paths";
 import AppSettingsMobile from "./AppSettingsMobile";
 import { useAppSelector } from "../../store/hooks";
 import { useLogout } from "../../modules/auth-module";
 
 const HeaderContainerSX = {
+  height: "70px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -50,7 +51,9 @@ export default function Header() {
   return (
     <>
       <Box sx={HeaderContainerSX}>
-        <Logo />
+        <CustomLink to={MAIN} sx={{ color: "inherit" }}>
+          <Logo />
+        </CustomLink>
         <Box sx={HeaderHandlersContainerSX}>
           <MobileSettingsContainerSX>
             <AppSettingsMobile />
@@ -70,9 +73,9 @@ export default function Header() {
               </CustomLink>
             )}
           </Box>
-          <Button variant="contained" size="small" onClick={logout}>
+          {/* <Button variant="contained" size="small" onClick={logout}>
             {t("logout")}
-          </Button>
+          </Button> */}
         </Box>
       </Box>
       <Divider />

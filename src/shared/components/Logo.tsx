@@ -7,16 +7,10 @@ export function Logo() {
   return (
     <Typography
       sx={{
-        fontFamily: "Bungee Shade",
-        fontSize: "26px",
+        fontFamily: "Righteous",
+        fontSize: "22px",
         cursor: "pointer",
         display: "inline-block",
-        "&:hover": {
-          transform: "translate(1px, -1px)",
-        },
-        [theme.breakpoints.down("sm")]: {
-          fontSize: "16px",
-        },
       }}
     >
       Collectory
