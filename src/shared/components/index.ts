@@ -7,3 +7,5 @@ export * from "./LightTypo";
 export * from "./SecondaryHeadingTypo";
 export * from "./BodyTypo";
 export * from "./Modal";
+export * from "./Dropzone";
+export * from "./PasswordInput";
