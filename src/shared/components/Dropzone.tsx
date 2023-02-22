@@ -16,6 +16,7 @@ const baseStyle = {
   color: "#bdbdbd",
   outline: "none",
   transition: "border .24s ease-in-out",
+  cursor: "pointer",
 };
 
 const focusedStyle = {
@@ -32,7 +33,7 @@ const rejectStyle = {
 
 export type ImageUrlAndFileType = {
   url: string;
-  file: File;
+  file: File | null;
 };
 
 interface IFropzoneProps {

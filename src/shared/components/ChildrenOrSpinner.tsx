@@ -5,6 +5,16 @@ interface IChildrenOrSpinnerProps extends BoxProps {
   condition: boolean;
 }
 
-export function ChildrenOrSpinner({ condition, children, ...args }: IChildrenOrSpinnerProps) {
-  return <Box {...args}>{condition ? <CircularProgress /> : children}</Box>;
+export function ChildrenOrSpinner({ condition, children, sx, ...args }: IChildrenOrSpinnerProps) {
+  return (
+    <>
+      {condition ? (
+        <Box sx={{ display: "flex", justifyContent: "center", ...sx }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        children
+      )}
+    </>
+  );
 }

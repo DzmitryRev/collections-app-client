@@ -9,3 +9,5 @@ export * from "./BodyTypo";
 export * from "./Modal";
 export * from "./Dropzone";
 export * from "./PasswordInput";
+export * from "./Spinner";
+export * from "./ErrorWhileLoading";
