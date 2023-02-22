@@ -8,7 +8,7 @@ interface IUserAvatarProps {
 }
 
 export function UserAvatar({ size, src, userName }: IUserAvatarProps) {
-  const pixelSize = size === "large" ? "200px" : "60px";
+  const pixelSize = size === "large" ? "200px" : "40px";
   return (
     <Avatar sx={{ width: pixelSize, height: pixelSize }} alt={`${userName} avatar`} src={src} />
   );
