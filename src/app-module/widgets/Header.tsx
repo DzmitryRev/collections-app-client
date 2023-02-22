@@ -9,6 +9,7 @@ import { LOGIN, MAIN } from "../../shared/constants/paths";
 import AppSettingsMobile from "./AppSettingsMobile";
 import { useAppSelector } from "../../store";
 import { useLogout } from "../../modules/auth-module";
+import { UserMenu } from "../../modules/user-module";
 
 const HeaderContainerSX = {
   height: "70px",
@@ -24,8 +25,9 @@ const HeaderHandlersContainerSX = {
   justifyContent: "space-between",
   alignItems: "center",
 };
+
 const HeaderLoginContainerSX = {
-  ml: 2,
+  ml: 1,
 };
 
 const MobileSettingsContainerSX = styled(Box)(({ theme }) => ({
@@ -64,7 +66,7 @@ export default function Header() {
           </PCSettingsContainerSX>
           <Box sx={HeaderLoginContainerSX}>
             {user ? (
-              <>{user.name}</>
+              <UserMenu user={user} logout={logout} />
             ) : (
               <CustomLink to={LOGIN}>
                 <Button variant="contained" size="small">
@@ -73,9 +75,6 @@ export default function Header() {
               </CustomLink>
             )}
           </Box>
-          {/* <Button variant="contained" size="small" onClick={logout}>
-            {t("logout")}
-          </Button> */}
         </Box>
       </Box>
       <Divider />
