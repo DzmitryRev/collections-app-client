@@ -48,7 +48,7 @@ export default function Header() {
 
   const { logout } = useLogout();
 
-  const { user } = useAppSelector((store) => store.AuthReducer);
+  const { userId } = useAppSelector((store) => store.AuthReducer);
 
   return (
     <>
@@ -65,8 +65,8 @@ export default function Header() {
             <DefaultThemeSwitcher />
           </PCSettingsContainerSX>
           <Box sx={HeaderLoginContainerSX}>
-            {user ? (
-              <UserMenu user={user} logout={logout} />
+            {userId ? (
+              <UserMenu userId={userId} logout={logout} />
             ) : (
               <CustomLink to={LOGIN}>
                 <Button variant="contained" size="small">

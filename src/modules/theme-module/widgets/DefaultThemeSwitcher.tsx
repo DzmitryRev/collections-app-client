@@ -11,7 +11,6 @@ export function DefaultThemeSwitcher() {
 
   return (
     <IconButton
-      sx={{ p: "4px" }}
       aria-label="change theme"
       onClick={() => {
         dispatch(toggleTheme());

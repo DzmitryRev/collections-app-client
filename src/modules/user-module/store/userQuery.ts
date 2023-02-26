@@ -1,13 +1,16 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { UserType } from "../../../shared/api";
+import { axiosBaseQuery, UserType } from "../../../shared/api";
+import { API_URL } from "../../../shared/constants/backend";
 
 export const userQuery = createApi({
   reducerPath: "userQuery",
-  baseQuery: baseQueryWithToken,
+  baseQuery: axiosBaseQuery({
+    baseUrl: API_URL,
+  }),
   tagTypes: ["Profile"],
   endpoints: (builder) => ({
     getUserProfile: builder.query<UserType, string>({
-      query: (id) => `user/${id}`,
+      query: (id) => ({ url: `user/${id}`, method: "get" }),
       providesTags: ["Profile"],
     }),
     updateUserBody: builder.mutation<UserType, Partial<UserType>>({
@@ -16,7 +19,21 @@ export const userQuery = createApi({
         return {
           url: `settings/${id}`,
           method: "PUT",
-          body,
+          data: body,
+        };
+      },
+      invalidatesTags: ["Profile"],
+    }),
+    updateUserForAdmin: builder.mutation<
+      UserType,
+      Partial<Pick<UserType, "id" | "isBlocked" | "isAdmin">>
+    >({
+      query: (data) => {
+        const { id, ...body } = data;
+        return {
+          url: `settings/make-admin/${id}`,
+          method: "put",
+          data: body,
         };
       },
       invalidatesTags: ["Profile"],
@@ -24,4 +41,5 @@ export const userQuery = createApi({
   }),
 });
 
-export const { useGetUserProfileQuery, useUpdateUserBodyMutation } = userQuery;
+export const { useGetUserProfileQuery, useUpdateUserBodyMutation, useUpdateUserForAdminMutation } =
+  userQuery;

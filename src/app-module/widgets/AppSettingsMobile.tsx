@@ -5,7 +5,7 @@ import { MobileThemeSwitcher } from "../../modules/theme-module";
 import { MobileLanguageSwitcher } from "../../modules/langualge-module";
 
 const AppSettingsListItem = styled(ListItem)(() => ({
-  px: 5,
+    px: 5,
 }));
 
 export default function AppSettingsMobile() {
@@ -14,9 +14,6 @@ export default function AppSettingsMobile() {
   return (
     <>
       <IconButton
-        sx={{
-          p: "4px",
-        }}
         aria-label="open settings"
         onClick={() => {
           setIsDrawerOpen(true);

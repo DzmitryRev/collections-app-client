@@ -9,10 +9,13 @@ import {
   PASSWORD_CHANHED,
   REGISTRATION,
   REJECTED_CONFIRMATION,
+  SETTINGS,
+  USER,
 } from "../../shared/constants/paths";
 import { ProtectedPageByParams } from "../Hocs/ProtectedPageByParams";
 import { ProtectedPageByState } from "../Hocs/ProtectedPageByState";
 import { RedirectIfAuth } from "../Hocs/RedirectIfAuth";
+import { RedirectIfUnauth } from "../Hocs/RedirectIfunauth";
 import {
   ConfirmationErrorPage,
   ConfirmEmailPage,
@@ -23,6 +26,8 @@ import {
   RegistrationPage,
   ForgotPassword,
 } from "../pages";
+import { UserProfilePage } from "../pages/UserProfilePage";
+import { UserSettingsPage } from "../pages/UserSettingsPage";
 
 export default function Router() {
   return (
@@ -92,6 +97,15 @@ export default function Router() {
           </RedirectIfAuth>
         }
       />
+      <Route
+        path={SETTINGS}
+        element={
+          <RedirectIfUnauth>
+            <UserSettingsPage />
+          </RedirectIfUnauth>
+        }
+      />
+      <Route path={USER} element={<UserProfilePage />} />
     </Routes>
   );
 }

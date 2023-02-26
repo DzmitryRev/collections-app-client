@@ -5,9 +5,11 @@ interface LanguageState {
   language: AvailableLanguagesType;
 }
 
-const LANGUAGE_LS_NAME = "i18nextLng";
+const LANGUAGE_LS_NAME = "trest";
 
 const savedLanguage = (localStorage.getItem(LANGUAGE_LS_NAME) as AvailableLanguagesType) || "en";
+
+changeLanguage(savedLanguage);
 
 const initialState: LanguageState = {
   language: savedLanguage,

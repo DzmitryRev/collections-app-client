@@ -12,12 +12,12 @@ export const connectionErrorSlice = createSlice({
   name: "connectionError",
   initialState,
   reducers: {
-    setIsError: (state, { payload }: PayloadAction<boolean>) => {
+    setConnectionError: (state, { payload }: PayloadAction<boolean>) => {
       state.isError = payload;
     },
   },
 });
 
-export const { setIsError } = connectionErrorSlice.actions;
+export const { setConnectionError } = connectionErrorSlice.actions;
 
 export const ConnectionErrorReducer = connectionErrorSlice.reducer;

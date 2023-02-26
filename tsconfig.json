@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "src/modules/user-module/wigdet/UpdateEmailForm.tsx", "src/modules/user-module/wigdet/UpdateEmailForm.tsx", "trash/UpdatePasswordForm.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

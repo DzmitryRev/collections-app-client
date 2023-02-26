@@ -5,21 +5,20 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Person2Icon from "@mui/icons-material/Person2";
 import { UserAvatar } from "../components/UserAvatar";
 import { Button, CustomLink } from "../../../shared/components";
-import { UserType } from "../../../shared/api";
 import { useMenu } from "../../../shared/hooks";
 import { useGetUserProfileQuery } from "../store/userQuery";
 interface IUserMenuProps {
-  user: UserType;
+  userId: string;
   logout: () => void;
 }
 
-export function UserMenu({ user, logout }: IUserMenuProps) {
+export function UserMenu({ userId, logout }: IUserMenuProps) {
   const [anchorEl, isOpen, openMenu, closeMenu] = useMenu();
 
-  const { data, isLoading, error } = useGetUserProfileQuery(user.id);
+  const { data, isLoading, error } = useGetUserProfileQuery(userId);
 
   const isLoadingOrNoData = isLoading || !data;
-  
+
   return (
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", m: 0 }}>
       {!isLoadingOrNoData && (
@@ -39,7 +38,7 @@ export function UserMenu({ user, logout }: IUserMenuProps) {
               "aria-labelledby": "basic-button",
             }}
           >
-            <CustomLink sx={{ color: "inherit" }} to={`/user/${user.id}`}>
+            <CustomLink sx={{ color: "inherit" }} to={`/user/${userId}`}>
               <MenuItem onClick={closeMenu}>
                 <Person2Icon sx={{ mr: 1 }} /> Profile
               </MenuItem>

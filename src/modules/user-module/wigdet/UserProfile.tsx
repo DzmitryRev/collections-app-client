@@ -1,11 +1,6 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import {
-  ErrorWhileLoading,
-  LightTypo,
-  SecondaryHeadingTypo,
-  Spinner,
-} from "../../../shared/components";
+import { LightTypo, SecondaryHeadingTypo, Spinner } from "../../../shared/components";
 import ReactMarkdown from "react-markdown";
 import { AdminActionsPanel } from "./AdminActionsPanel";
 import { UserAvatar } from "../components/UserAvatar";
@@ -15,16 +10,15 @@ import { ProfileContainer } from "../components/ProfileContainer";
 import { useGetUserProfileQuery } from "../store/userQuery";
 
 interface IUserProfileProps {
-  currentUser: UserType | null;
+  authUser: string;
+  isAuthUserAdmin: boolean;
   userId: string;
 }
 
-export function UserProfile({ currentUser, userId }: IUserProfileProps) {
-  const { data, isLoading, error } = useGetUserProfileQuery(userId);
+export function UserProfile({ authUser, isAuthUserAdmin, userId }: IUserProfileProps) {
+  const { data, isLoading, isError: loadingError } = useGetUserProfileQuery(userId);
 
   const isLoadingOrNoData = isLoading || !data;
-
-  if (error) return <ErrorWhileLoading />;
 
   return (
     <ProfileContainer>
@@ -32,8 +26,9 @@ export function UserProfile({ currentUser, userId }: IUserProfileProps) {
         <Spinner />
       ) : (
         <ProfilePaper elevation={4}>
-          {currentUser && currentUser.isAdmin && data && (
+          {authUser && isAuthUserAdmin && data && (
             <AdminActionsPanel
+              userId={userId}
               isUserAdmin={data.isAdmin || false}
               isUserBlocked={data.isBlocked || false}
             />

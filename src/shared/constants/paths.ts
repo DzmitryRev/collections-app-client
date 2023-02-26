@@ -7,3 +7,5 @@ export const REJECTED_CONFIRMATION = "/confirmation-error";
 export const NEW_PASSWORD_SENT = "/new-password-sent";
 export const PASSWORD_CHANHED = "/password-changed";
 export const FORGOT_PASSWORD = "/forgot-password";
+export const USER = "/user/:id";
+export const SETTINGS = "/settings";

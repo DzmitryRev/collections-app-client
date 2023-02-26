@@ -1,49 +1,29 @@
 import axios from "axios";
-import { MessageResType, UserType } from "../../../shared/api";
-import { BACKEND_URL } from "../../../shared/constants/backend";
-
-export type RegistrationBodyType = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { api, MessageResType } from "../../../shared/api";
+import { API_URL } from "../../../shared/constants/backend";
+import { LoginBodyType, LoginResType, RegistrationBodyType } from "./types";
 
 export const registrationRequest = ({ name, email, password }: RegistrationBodyType) => {
-  return axios.post<MessageResType>(`${BACKEND_URL}/api/registration`, { name, email, password });
+  return api.post<MessageResType>(`${API_URL}registration`, { name, email, password });
 };
-
-export type LoginBodyType = {
-  email: string;
-  password: string;
-};
-
-export type LoginResType = { accessToken: string; user: UserType };
 
 export const loginRequest = ({ email, password }: LoginBodyType) => {
-  return axios.post<LoginResType>(
-    `${BACKEND_URL}/api/login`,
-    {
-      email,
-      password,
-    },
-    { withCredentials: true }
-  );
+  return api.post<LoginResType>(`${API_URL}login`, {
+    email,
+    password,
+  });
 };
 
 export const forgotPasswordRequest = ({ email }: { email: string }) => {
-  return axios.post<MessageResType>(
-    `${BACKEND_URL}/api/resetPassword`,
-    {
-      email,
-    },
-    { withCredentials: true }
-  );
+  return api.post<MessageResType>(`${API_URL}resetPassword`, {
+    email,
+  });
 };
 
 export const logoutRequest = () => {
-  return axios.post<MessageResType>(`${BACKEND_URL}/api/logout`, {}, { withCredentials: true });
+  return api.post<MessageResType>(`${API_URL}logout`, {});
 };
 
 export const checkAuthRequest = () => {
-  return axios.get<LoginResType>(`${BACKEND_URL}/api/refresh`, { withCredentials: true });
+  return axios.get<LoginResType>(`${API_URL}refresh`, { withCredentials: true });
 };

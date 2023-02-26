@@ -4,13 +4,13 @@ import { useAppSelector } from "../../store/hooks";
 
 export type AccessToPageStateType = { access?: boolean };
 
-export function RedirectIfAuth({ children }: PropsWithChildren) {
+export function RedirectIfUnauth({ children }: PropsWithChildren) {
   const { userId } = useAppSelector((state) => state.AuthReducer);
   const navigate = useNavigate();
   useEffect(() => {
-    if (userId) {
+    if (!userId) {
       navigate("/");
     }
   }, []);
-  return <>{!userId && children}</>;
+  return <>{userId && children}</>;
 }

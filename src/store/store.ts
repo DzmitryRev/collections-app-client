@@ -2,8 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { ThemeReducer } from "../modules/theme-module";
 import { AuthReducer } from "../modules/auth-module";
 import { LanguageReducer } from "../modules/langualge-module";
-import { ConnectionErrorReducer } from "../modules/connection-error-module";
 import { userQuery } from "../modules/user-module";
+import { ConnectionErrorReducer } from "../app-module/store/slices/connectionErrorSlice/connectionErrorSlice";
 
 export const store = configureStore({
   reducer: {
