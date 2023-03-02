@@ -7,14 +7,8 @@ interface IChildrenOrSpinnerProps extends BoxProps {
 
 export function ChildrenOrSpinner({ condition, children, sx, ...args }: IChildrenOrSpinnerProps) {
   return (
-    <>
-      {condition ? (
-        <Box sx={{ display: "flex", justifyContent: "center", ...sx }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        children
-      )}
-    </>
+    <Box sx={{ ...sx }} {...args}>
+      {condition ? <CircularProgress size="30px" /> : children}
+    </Box>
   );
 }

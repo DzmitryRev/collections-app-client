@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Avatar, Box, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
@@ -7,58 +7,21 @@ import {
   Dropzone,
   ImageUrlAndFileType,
 } from "../../../shared/components";
-import { imagekit } from "../../../shared/services/imagekit";
-import { useUpdateUserBodyMutation } from "../store/userQuery";
+import { UpdateUserBodyType } from "../api/types";
+import { useUploadPhoto } from "../../../shared/hooks";
 
 interface IUpdateAvatarFormProps {
-  userId: string;
   avatar: string;
+  isUpdating: boolean;
+  updateUser: (body: UpdateUserBodyType) => void;
 }
 
-export function UpdateAvatarForm({ userId, avatar }: IUpdateAvatarFormProps) {
-  const [currentAvatar, setAvatar] = useState<ImageUrlAndFileType>({
-    url: avatar,
-    file: null,
-  });
-
-  const [updateAvatar, { isLoading: isUpdating }] = useUpdateUserBodyMutation();
-
-  const updateUserAvatar = (body: { avatar: string }) => {
-    updateAvatar({ id: userId, ...body });
+export function UpdateAvatarForm({ avatar, isUpdating, updateUser }: IUpdateAvatarFormProps) {
+  const updatePhoto = (url: string) => {
+    updateUser({ avatar: url });
   };
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const saveAvatar = () => {
-    if (!currentAvatar.file && !currentAvatar.url) {
-      updateUserAvatar({ avatar: "" });
-      return;
-    }
-    if (!currentAvatar.file) {
-      return;
-    }
-    setIsLoading(true);
-    imagekit.upload(
-      {
-        file: currentAvatar.file,
-        fileName: "collectory-avatars",
-      },
-      function (err, result) {
-        setIsLoading(false);
-        if (err) {
-          return;
-        }
-        updateUserAvatar({ avatar: result?.url || "" });
-      }
-    );
-  };
-
-  const cleanCurrentAvatar = () => {
-    setAvatar({
-      url: "",
-      file: null,
-    });
-  };
+  const [currentAvatar, setAvatar, isPhotoUploading, cleanCurrentAvatar, saveAvatar] =
+    useUploadPhoto(avatar, updatePhoto);
 
   return (
     <>
@@ -81,7 +44,7 @@ export function UpdateAvatarForm({ userId, avatar }: IUpdateAvatarFormProps) {
         />
       </Box>
       <Box sx={{ textAlign: "right" }}>
-        <ChildrenOrSpinner condition={isUpdating || isLoading}>
+        <ChildrenOrSpinner condition={isUpdating || isPhotoUploading}>
           <Button variant="contained" onClick={saveAvatar}>
             Save
           </Button>

@@ -1,6 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import {
+    COLLECTION_ITEM,
+  COLLECTION_PAGE,
+  COLLECTION_PAGE_SETTINGS,
   CONFIRM_EMAIL,
   EMAIL_CONFIRMED,
   FORGOT_PASSWORD,
@@ -15,7 +18,7 @@ import {
 import { ProtectedPageByParams } from "../Hocs/ProtectedPageByParams";
 import { ProtectedPageByState } from "../Hocs/ProtectedPageByState";
 import { RedirectIfAuth } from "../Hocs/RedirectIfAuth";
-import { RedirectIfUnauth } from "../Hocs/RedirectIfunauth";
+import { RedirectIfUnauth } from "../Hocs/RedirectIfUnauth";
 import {
   ConfirmationErrorPage,
   ConfirmEmailPage,
@@ -25,7 +28,10 @@ import {
   PasswordChangedPage,
   RegistrationPage,
   ForgotPassword,
+  CollectionPage,
+  CollectionSettingsPage,
 } from "../pages";
+import { CollectionItemPage } from "../pages/CollectionItemPage";
 import { UserProfilePage } from "../pages/UserProfilePage";
 import { UserSettingsPage } from "../pages/UserSettingsPage";
 
@@ -106,6 +112,16 @@ export default function Router() {
         }
       />
       <Route path={USER} element={<UserProfilePage />} />
+      <Route path={COLLECTION_PAGE} element={<CollectionPage />} />
+      <Route
+        path={COLLECTION_PAGE_SETTINGS}
+        element={
+          <RedirectIfUnauth>
+            <CollectionSettingsPage />
+          </RedirectIfUnauth>
+        }
+      />
+      <Route path={COLLECTION_ITEM} element={<CollectionItemPage />} />
     </Routes>
   );
 }

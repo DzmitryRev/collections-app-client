@@ -1,9 +1,11 @@
 import React, { useMemo } from "react";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { Formik } from "formik";
-import { Button, ChildrenOrSpinner, ValidatedInput } from "../../../shared/components";
+import { ValidatedInput } from "../../../shared/components";
 import { updateUserBodyValidationSchema } from "../utils/updateUserBodyValidation";
+import SaveIcon from "@mui/icons-material/Save";
 
 type UserBodyFormInitialType = { name: string; about: string };
 
@@ -55,12 +57,16 @@ export function UserBodyForm({ initialValue, isUpdating, updateUser }: IUserBody
               fullWidth
               multiline
             />
-            <Box>
-              <ChildrenOrSpinner condition={isUpdating}>
-                <Button variant="contained" type="submit">
-                  Save changes
-                </Button>
-              </ChildrenOrSpinner>
+            <Box sx={{ display: "flex", justifyContent: "end" }}>
+              <LoadingButton
+                type="submit"
+                loading={isUpdating}
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="contained"
+              >
+                Save
+              </LoadingButton>
             </Box>
           </Box>
         </form>

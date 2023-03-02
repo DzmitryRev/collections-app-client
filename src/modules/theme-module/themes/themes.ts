@@ -15,5 +15,8 @@ export const lightTheme = createTheme({
   ...rootFontsStyle,
   palette: {
     mode: "light",
+    background: {
+      default: "#e8eddf",
+    },
   },
 });

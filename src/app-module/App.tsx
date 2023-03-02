@@ -26,26 +26,9 @@ function App() {
         <Header />
         <ConnectionErrorAlert />
         <Box sx={{ px: "5px", pt: "30px", pb: "20px", flex: "1 1 auto" }}>
-          {/* <Box sx={{ mb: 3 }}></Box> */}
-          {/* <UserProfile
-            currentUser={{
-              id: "1",
-              photo: "1",
-              name: "1",
-              email: "1",
-              about: "1",
-              isBlocked: false,
-              isAdmin: true,
-            }}
-            userId="10"
-          /> */}
-          {/* <Box sx={{ mb: 3 }}></Box>
-          <UserProfile currentUser={null} userId="10" />
-          <Box sx={{ mb: 3 }}></Box>
-          <UserSettings /> */}
           <Router />
         </Box>
-        <Box sx={{ background: "red" }}>footer</Box>
+        {/* <Box sx={{ background: "red" }}>footer</Box> */}
       </Box>
     </>
   );

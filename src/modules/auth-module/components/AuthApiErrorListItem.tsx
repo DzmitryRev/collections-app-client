@@ -14,7 +14,7 @@ export function AuthApiErrorListItem({ error }: IAuthApiErrorListItemProps) {
     <ListItem key={error} disablePadding={true}>
       <FiberManualRecordIcon sx={{ color: "error.main", fontSize: "10px", mr: 1 }} />
       <ListItemText>
-        <LightTypo sx={{ color: "error.main" }}>{t(error)}</LightTypo>
+        <LightTypo sx={{ color: "error.main", fontWeight: 500 }}>{t(error)}</LightTypo>
       </ListItemText>
     </ListItem>
   );

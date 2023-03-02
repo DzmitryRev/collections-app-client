@@ -53,7 +53,11 @@ export function UserSettings({ userId }: IUserSettingsProps) {
         )}
       </ProfileContainer>
       <Modal open={isChangeAvatarOpen} closeModal={closeChangeAvatar}>
-        <UpdateAvatarForm avatar={data?.avatar || ""} userId={userId} />
+        <UpdateAvatarForm
+          avatar={data?.avatar || ""}
+          updateUser={updateUserBody}
+          isUpdating={isUpdating}
+        />
       </Modal>
     </>
   );

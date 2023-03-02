@@ -25,5 +25,5 @@ export const logoutRequest = () => {
 };
 
 export const checkAuthRequest = () => {
-  return axios.get<LoginResType>(`${API_URL}refresh`, { withCredentials: true });
+  return api.get<LoginResType>(`${API_URL}refresh`, { withCredentials: true });
 };

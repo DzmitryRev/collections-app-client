@@ -7,14 +7,18 @@ const StyledModalPaper = styled(Paper)(({ theme }) => ({
   left: "50%",
   width: "460px",
   transform: "translate(-50%, -50%)",
-  padding: "25px",
+  maxHeight: "80vh",
+  overflow: "scroll",
+  padding: "45px 25px 25px",
   [theme.breakpoints.down("md")]: {
     width: "360px",
   },
   "@media screen and (max-width: 370px)": {
     width: "310px",
-    padding: "10px",
-    paddingTop: "20px",
+    padding: "45px 15px 15px",
+  },
+  "::-webkit-scrollbar": {
+    display: "none",
   },
 }));
 
@@ -27,7 +31,7 @@ export function Modal({ open, closeModal, children }: IModalCustomProps) {
     <MuiModal open={open} onClose={closeModal}>
       <Fade in={open}>
         <StyledModalPaper>
-          <IconButton sx={{ position: "absolute", top: 3, right: 3 }} onClick={closeModal}>
+          <IconButton sx={{ position: "absolute", top: 2, right: 2 }} onClick={closeModal}>
             <CloseIcon sx={{ fontSize: "25px" }} />
           </IconButton>
           {children}

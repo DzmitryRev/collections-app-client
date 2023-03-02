@@ -31,7 +31,7 @@ export const userQuery = createApi({
       query: (data) => {
         const { id, ...body } = data;
         return {
-          url: `settings/make-admin/${id}`,
+          url: `settings/admin/${id}`,
           method: "put",
           data: body,
         };

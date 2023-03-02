@@ -9,3 +9,6 @@ export const PASSWORD_CHANHED = "/password-changed";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const USER = "/user/:id";
 export const SETTINGS = "/settings";
+export const COLLECTION_PAGE = "/collection/:collectionId";
+export const COLLECTION_PAGE_SETTINGS = "/collection/:collectionId/settings";
+export const COLLECTION_ITEM = "/collection-item/:collectionItemId";
