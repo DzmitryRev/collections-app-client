@@ -67,7 +67,7 @@ export function SearchItemsWidget() {
             </IconButton>
           </Box>
           <Box>
-            {!!data?.items.length && (
+            {!!data?.items?.length && (
               <List dense sx={{ width: "100%" }}>
                 {data.items.map((item) => {
                   const labelId = `checkbox-list-secondary-label-${item.id}`;

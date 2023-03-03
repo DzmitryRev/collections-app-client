@@ -25,7 +25,7 @@ export const collectionsQuery = createApi({
     }),
     searchCollectionsItems: builder.query<{ items: CollectionItemType[] }, string>({
       query: (searchValue) => ({
-        url: `/search-items?value=${searchValue}`,
+        url: `search-items?value=${searchValue}`,
         method: "get",
       }),
     }),
