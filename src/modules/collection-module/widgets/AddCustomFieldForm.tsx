@@ -7,6 +7,7 @@ import { AnyFieldType, CollectionType, FieldTypes } from "../api/types";
 import { FIELD_TYPES } from "../constants/fieldTypes";
 import { LoadingButton } from "@mui/lab";
 import { addCustomFieldValidationSchema } from "../utils/addCustomFieldValidationSchema";
+import { useTranslation } from "react-i18next";
 
 interface IAddCustomFieldFormProps {
   requiredFields: AnyFieldType[];
@@ -26,6 +27,8 @@ export function AddCustomFieldForm({
   updateCollection,
   isUpdating,
 }: IAddCustomFieldFormProps) {
+  const { t } = useTranslation(["global", "collections"]);
+
   return (
     <Box sx={{ pt: 2 }}>
       <Formik
@@ -34,7 +37,7 @@ export function AddCustomFieldForm({
         enableReinitialize={true}
         onSubmit={(values, { setErrors }) => {
           if ([...requiredFields, ...customFields].find((item) => item.name === values.name)) {
-            setErrors({ name: "такое поле уже есть" });
+            setErrors({ name: `${t("field_exist", { ns: "collections" })}` });
           } else {
             updateCollection({
               customFields: [
@@ -50,7 +53,7 @@ export function AddCustomFieldForm({
             <Box>
               <ValidatedInput
                 sx={{ mb: 2 }}
-                label="Name"
+                label={t("name")}
                 name="name"
                 value={values.name}
                 touched={formik.touched.name}
@@ -61,9 +64,9 @@ export function AddCustomFieldForm({
                 fullWidth
               />
               <FormControl sx={{ mb: 2 }}>
-                <InputLabel>Type</InputLabel>
+                <InputLabel>{t("type")}</InputLabel>
                 <Select
-                  label="Type"
+                  label={t("type")}
                   name="type"
                   value={values.type}
                   onChange={(e) => {
@@ -88,7 +91,7 @@ export function AddCustomFieldForm({
                 startIcon={<AddIcon />}
                 variant="contained"
               >
-                Add
+                {t("add")}
               </LoadingButton>
             </Box>
           </form>

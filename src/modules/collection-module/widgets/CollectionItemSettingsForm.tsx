@@ -3,9 +3,11 @@ import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/material";
 import { Formik } from "formik";
 import AddIcon from "@mui/icons-material/Add";
+import SaveIcon from "@mui/icons-material/Save";
 import { CreateCollectionItemMap } from "../components/CreateCollectionItemMap";
 import { useGetCollectionQuery } from "../store/collectionsQuery";
 import { SecondaryHeadingTypo } from "../../../shared/components";
+import { useTranslation } from "react-i18next";
 
 interface ICollectionItemSettingsFormProps {
   collectionId: string;
@@ -20,6 +22,8 @@ export function CollectionItemSettingsForm({
   collectionItemValues,
   isLoading,
 }: ICollectionItemSettingsFormProps) {
+  const { t } = useTranslation(["collections", "global"]);
+
   const { data } = useGetCollectionQuery(collectionId);
 
   const initialValues = useMemo(() => {
@@ -55,7 +59,7 @@ export function CollectionItemSettingsForm({
         {({ values, setFieldValue, ...formik }) => (
           <>
             <SecondaryHeadingTypo>
-              {collectionItemValues ? "Update Item" : "Add Item"}
+              {collectionItemValues ? t("update_item") : t("create_item")}
             </SecondaryHeadingTypo>
             <form onSubmit={formik.handleSubmit}>
               <Box sx={{ mb: 2 }}>
@@ -71,10 +75,12 @@ export function CollectionItemSettingsForm({
                   loading={isLoading}
                   disabled={isLoading}
                   loadingPosition="start"
-                  startIcon={<AddIcon />}
+                  startIcon={collectionItemValues ? <SaveIcon /> : <AddIcon />}
                   variant="contained"
                 >
-                  {collectionItemValues ? "Update" : "Add"}
+                  {collectionItemValues
+                    ? t("update", { ns: "global" })
+                    : t("create", { ns: "global" })}
                 </LoadingButton>
               </Box>
             </form>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import {
-    COLLECTION_ITEM,
+  COLLECTION_ITEM,
   COLLECTION_PAGE,
   COLLECTION_PAGE_SETTINGS,
   CONFIRM_EMAIL,
@@ -30,6 +30,7 @@ import {
   ForgotPassword,
   CollectionPage,
   CollectionSettingsPage,
+  MainPage
 } from "../pages";
 import { CollectionItemPage } from "../pages/CollectionItemPage";
 import { UserProfilePage } from "../pages/UserProfilePage";
@@ -38,6 +39,8 @@ import { UserSettingsPage } from "../pages/UserSettingsPage";
 export default function Router() {
   return (
     <Routes>
+      <Route path={"/"} element={<MainPage />} />
+
       <Route
         path={CONFIRM_EMAIL}
         element={

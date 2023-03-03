@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { useDropzone } from "react-dropzone";
 import FolderIcon from "@mui/icons-material/Folder";
 import { LightTypo } from "./LightTypo";
+import { useTranslation } from "react-i18next";
 
 const baseStyle = {
   flex: 1,
@@ -41,6 +42,7 @@ interface IFropzoneProps {
 }
 
 export function Dropzone({ setImage }: IFropzoneProps) {
+  const { t } = useTranslation("dropzone");
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length) {
       const file = acceptedFiles[0];
@@ -69,9 +71,7 @@ export function Dropzone({ setImage }: IFropzoneProps) {
       <Box sx={{ flexDirection: "column" }} {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <FolderIcon sx={{ fontSize: "40px", mb: 1 }} />
-        <LightTypo sx={{ textAlign: "center" }}>
-          Drop some files here, or click to select files
-        </LightTypo>
+        <LightTypo sx={{ textAlign: "center" }}>{t("load_image_info")}</LightTypo>
       </Box>
     </div>
   );

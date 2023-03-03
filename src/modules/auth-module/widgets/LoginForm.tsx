@@ -2,18 +2,15 @@ import React from "react";
 import { useFormik } from "formik";
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { ChildrenOrSpinner, CustomLink, LightTypo } from "../../../shared/components";
-import {
-  AuthFormInnerContainer,
-  AuthFormPasswordInput,
-  AuthSubmitButton,
-  AuthValidatedInput,
-} from "../components";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { CustomLink, LightTypo } from "../../../shared/components";
+import { AuthFormInnerContainer, AuthFormPasswordInput, AuthValidatedInput } from "../components";
 import { loginInitialValue, loginValidationSchema } from "../utils/LoginValidation";
 import { FORGOT_PASSWORD, MAIN, REGISTRATION } from "../../../shared/constants/paths";
 import AuthApiErrorsList from "./AuthApiErrorBlock";
 import { useAuth } from "../hooks/useAuth";
 import { loginThunk } from "../store/thunks/login.thunk";
+import { LoadingButton } from "@mui/lab";
 
 export function LoginForm() {
   const { t } = useTranslation(["auth", "global"]);
@@ -57,9 +54,18 @@ export function LoginForm() {
               <CustomLink to={FORGOT_PASSWORD}>{t("forgot_password")}</CustomLink>
             </LightTypo>
 
-            <ChildrenOrSpinner sx={{ textAlign: "center" }} condition={loading}>
-              <AuthSubmitButton>{t("login", { ns: "global" })}</AuthSubmitButton>
-            </ChildrenOrSpinner>
+            <Box sx={{ display: "flex", justifyContent: "end" }}>
+              <LoadingButton
+                type="submit"
+                loading={loading}
+                disabled={loading}
+                loadingPosition="start"
+                startIcon={<AccountCircleIcon />}
+                variant="contained"
+              >
+                {t("login", { ns: "global" })}
+              </LoadingButton>
+            </Box>
           </form>
         </Box>
         <AuthApiErrorsList errors={errors} />

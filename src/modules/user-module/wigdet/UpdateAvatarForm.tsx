@@ -1,14 +1,12 @@
 import React from "react";
 import { Avatar, Box, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  Button,
-  ChildrenOrSpinner,
-  Dropzone,
-  ImageUrlAndFileType,
-} from "../../../shared/components";
+import SaveIcon from "@mui/icons-material/Save";
+import { Dropzone, ImageUrlAndFileType } from "../../../shared/components";
 import { UpdateUserBodyType } from "../api/types";
 import { useUploadPhoto } from "../../../shared/hooks";
+import { LoadingButton } from "@mui/lab";
+import { useTranslation } from "react-i18next";
 
 interface IUpdateAvatarFormProps {
   avatar: string;
@@ -20,6 +18,8 @@ export function UpdateAvatarForm({ avatar, isUpdating, updateUser }: IUpdateAvat
   const updatePhoto = (url: string) => {
     updateUser({ avatar: url });
   };
+  const { t } = useTranslation("global");
+
   const [currentAvatar, setAvatar, isPhotoUploading, cleanCurrentAvatar, saveAvatar] =
     useUploadPhoto(avatar, updatePhoto);
 
@@ -44,11 +44,18 @@ export function UpdateAvatarForm({ avatar, isUpdating, updateUser }: IUpdateAvat
         />
       </Box>
       <Box sx={{ textAlign: "right" }}>
-        <ChildrenOrSpinner condition={isUpdating || isPhotoUploading}>
-          <Button variant="contained" onClick={saveAvatar}>
-            Save
-          </Button>
-        </ChildrenOrSpinner>
+        <Box sx={{ display: "flex", justifyContent: "end" }}>
+          <LoadingButton
+            loading={isUpdating || isPhotoUploading}
+            disabled={isUpdating || isPhotoUploading}
+            loadingPosition="start"
+            startIcon={<SaveIcon />}
+            variant="contained"
+            onClick={saveAvatar}
+          >
+            {t("save")}
+          </LoadingButton>
+        </Box>
       </Box>
     </>
   );

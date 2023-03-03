@@ -1,13 +1,18 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import { LightTypo, SecondaryHeadingTypo, Spinner } from "../../../shared/components";
+import {
+  ErrorLoadingDocument,
+  LightTypo,
+  SecondaryHeadingTypo,
+  Spinner,
+} from "../../../shared/components";
 import ReactMarkdown from "react-markdown";
 import { AdminActionsPanel } from "./AdminActionsPanel";
 import { UserAvatar } from "../components/UserAvatar";
-import { UserType } from "../../../shared/api";
 import { ProfilePaper } from "../components/ProfilePaper";
 import { ProfileContainer } from "../components/ProfileContainer";
 import { useGetUserProfileQuery } from "../store/userQuery";
+import { useTranslation } from "react-i18next";
 
 interface IUserProfileProps {
   authUser: string;
@@ -16,9 +21,19 @@ interface IUserProfileProps {
 }
 
 export function UserProfile({ authUser, isAuthUserAdmin, userId }: IUserProfileProps) {
-  const { data, isLoading, isError: loadingError } = useGetUserProfileQuery(userId);
+  const { t } = useTranslation("user");
+
+  const { data, isLoading, isError } = useGetUserProfileQuery(userId);
 
   const isLoadingOrNoData = isLoading || !data;
+
+  if (isError) {
+    return (
+      <>
+        <ErrorLoadingDocument />
+      </>
+    );
+  }
 
   return (
     <ProfileContainer>
@@ -46,7 +61,7 @@ export function UserProfile({ authUser, isAuthUserAdmin, userId }: IUserProfileP
                   {data.about ? (
                     <ReactMarkdown>{data.about}</ReactMarkdown>
                   ) : (
-                    <LightTypo sx={{ fontStyle: "italic" }}>About section is empty</LightTypo>
+                    <LightTypo sx={{ fontStyle: "italic" }}>{t("about_empty")}</LightTypo>
                   )}
                 </Box>
               </Box>

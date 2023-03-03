@@ -13,9 +13,9 @@ import { CustomLink } from "../../../shared/components";
 
 interface ICollectionsListProps {
   collections: CollectionInCollectionList[];
-  checkedCollections: string[];
+  checkedCollections?: string[];
   accessToCheck: boolean;
-  setCheckedCollections: React.Dispatch<string[]>;
+  setCheckedCollections?: React.Dispatch<string[]>;
 }
 
 export function CollectionsList({
@@ -25,14 +25,16 @@ export function CollectionsList({
   setCheckedCollections,
 }: ICollectionsListProps) {
   const toggleCheckCollection = (itemId: string) => () => {
-    const currentIndex = checkedCollections.indexOf(itemId);
-    const newChecked = [...checkedCollections];
-    if (currentIndex === -1) {
-      newChecked.push(itemId);
-    } else {
-      newChecked.splice(currentIndex, 1);
+    if (checkedCollections && setCheckedCollections) {
+      const currentIndex = checkedCollections.indexOf(itemId);
+      const newChecked = [...checkedCollections];
+      if (currentIndex === -1) {
+        newChecked.push(itemId);
+      } else {
+        newChecked.splice(currentIndex, 1);
+      }
+      setCheckedCollections(newChecked);
     }
-    setCheckedCollections(newChecked);
   };
 
   return (
@@ -50,7 +52,7 @@ export function CollectionsList({
                     <Checkbox
                       edge="end"
                       onChange={toggleCheckCollection(item.id)}
-                      checked={checkedCollections.indexOf(item.id) !== -1}
+                      checked={checkedCollections?.indexOf(item.id) !== -1}
                       inputProps={{ "aria-labelledby": labelId }}
                     />
                   )

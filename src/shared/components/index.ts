@@ -1,7 +1,6 @@
 export * from "./Logo";
 export * from "./Button";
 export * from "./ValidatedInput";
-export * from "./ChildrenOrSpinner";
 export * from "./CustomLink";
 export * from "./LightTypo";
 export * from "./SecondaryHeadingTypo";
@@ -10,3 +9,6 @@ export * from "./Modal";
 export * from "./Dropzone";
 export * from "./PasswordInput";
 export * from "./Spinner";
+export * from "./ErrorAlert";
+export * from "./AccessError";
+export * from "./ErrorLoadingDocument";

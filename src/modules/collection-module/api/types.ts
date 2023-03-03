@@ -5,6 +5,7 @@ export type CollectionType = {
   description: string;
   theme: string;
   photo: string;
+  creationDate: String;
   requiredFields: AnyFieldType[];
   customFields: AnyFieldType[];
 };

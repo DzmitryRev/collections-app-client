@@ -2,7 +2,14 @@ import React from "react";
 import { Box, Checkbox, Divider, IconButton, Paper } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { FieldContainer, FieldTypeLabelContainer } from "../components/Field";
-import { BodyTypo, Modal, Spinner } from "../../../shared/components";
+import {
+  AccessError,
+  BodyTypo,
+  ErrorLoadingDocument,
+  LightTypo,
+  Modal,
+  Spinner,
+} from "../../../shared/components";
 import {
   useGetCollectionItemQuery,
   useGetCollectionQuery,
@@ -16,6 +23,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Tag } from "../components/Tag";
 import { CollectionItemSettingsForm } from "./CollectionItemSettingsForm";
+import { useTranslation } from "react-i18next";
 
 interface ICollectionItemWidgetProps {
   authUser: string;
@@ -28,7 +36,9 @@ export function CollectionItemWidget({
   isAuthUserAdmin,
   collectionItemId,
 }: ICollectionItemWidgetProps) {
-  const { data, isLoading } = useGetCollectionItemQuery(collectionItemId);
+  const { t } = useTranslation("global");
+
+  const { data, isLoading, isError } = useGetCollectionItemQuery(collectionItemId);
   const { data: collection } = useGetCollectionQuery(data?.collectionId || "", {
     refetchOnMountOrArgChange: true,
   });
@@ -36,7 +46,8 @@ export function CollectionItemWidget({
   const [isUpdateItemOpen, openUpdateItem, closeUpdateItem] = useModal();
 
   const [toggleLike] = useToggleLikeCollectionItemMutation();
-  const [updateCollectionItem, { isLoading: isUpdating }] = useUpdateCollectionItemMutation();
+  const [updateCollectionItem, { isLoading: isUpdating, isError: isUpdatingError }] =
+    useUpdateCollectionItemMutation();
 
   const updateItem = (body: { [key: string]: unknown }) => {
     updateCollectionItem({ ...body, userId: data?.user || "", collectionItemId })
@@ -47,6 +58,14 @@ export function CollectionItemWidget({
   };
 
   const isAuthUserCollection = data?.user === authUser;
+
+  if (isError) {
+    return (
+      <>
+        <ErrorLoadingDocument />
+      </>
+    );
+  }
 
   return (
     <>
@@ -88,75 +107,67 @@ export function CollectionItemWidget({
                 if (item.type === "checkbox") {
                   return (
                     <Box key={item.name}>
-                      <>
-                        {data?.body[item.name] && String(data?.body[item.name]) !== "" ? (
-                          <FieldContainer key={item.name}>
-                            <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
-                            <Checkbox
-                              sx={{ p: 0, pb: "3px" }}
-                              checked={data?.body[item.name] as boolean}
-                              disabled={true}
-                            />
-                            <Divider />
-                          </FieldContainer>
+                      <FieldContainer key={item.name}>
+                        <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
+                        {data?.body[item.name] ? (
+                          <Checkbox
+                            sx={{ p: 0, pb: "3px" }}
+                            checked={data?.body[item.name] as boolean}
+                            disabled={true}
+                          />
                         ) : (
-                          <></>
+                          <LightTypo>{t("empty")}</LightTypo>
                         )}
-                      </>
+                        <Divider />
+                      </FieldContainer>
                     </Box>
                   );
                 }
                 if (item.type === "text") {
                   return (
                     <Box key={item.name}>
-                      <>
-                        {data?.body[item.name] && String(data?.body[item.name]) !== "" ? (
-                          <FieldContainer key={item.name}>
-                            <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
-                            <ReactMarkdown>{data?.body[item.name] as string}</ReactMarkdown>
-                            <Divider />
-                          </FieldContainer>
+                      <FieldContainer key={item.name}>
+                        <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
+                        {data?.body[item.name] ? (
+                          <ReactMarkdown>{data?.body[item.name] as string}</ReactMarkdown>
                         ) : (
-                          <></>
+                          <LightTypo>{t("empty")}</LightTypo>
                         )}
-                      </>
+                        <Divider />
+                      </FieldContainer>
                     </Box>
                   );
                 }
                 if (item.type === "tags") {
                   return (
                     <Box key={item.name}>
-                      <>
-                        {data?.body[item.name] && String(data?.body[item.name]) !== "" ? (
-                          <FieldContainer>
-                            <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
-                            <Box>
-                              {(data?.body[item.name] as string[]).map((tag) => (
-                                <Tag key={tag}>{tag}</Tag>
-                              ))}
-                            </Box>
-                            <Divider />
-                          </FieldContainer>
+                      <FieldContainer>
+                        <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
+                        {(data?.body[item.name] as string[]).length ? (
+                          <Box>
+                            {(data?.body[item.name] as string[]).map((tag, index) => (
+                              <Tag key={tag}>{tag}</Tag>
+                            ))}
+                          </Box>
                         ) : (
-                          <></>
+                          <LightTypo>{t("empty")}</LightTypo>
                         )}
-                      </>
+                        <Divider />
+                      </FieldContainer>
                     </Box>
                   );
                 }
                 return (
                   <Box key={item.name}>
-                    <>
-                      {data?.body[item.name] && String(data?.body[item.name]) !== "" ? (
-                        <FieldContainer key={item.name}>
-                          <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
-                          <BodyTypo>{data?.body[item.name] as string}</BodyTypo>
-                          <Divider />
-                        </FieldContainer>
+                    <FieldContainer key={item.name}>
+                      <FieldTypeLabelContainer>{item.name}</FieldTypeLabelContainer>
+                      {data?.body[item.name] ? (
+                        <BodyTypo>{data?.body[item.name] as string}</BodyTypo>
                       ) : (
-                        <></>
+                        <LightTypo>{t("empty")}</LightTypo>
                       )}
-                    </>
+                      <Divider />
+                    </FieldContainer>
                   </Box>
                 );
               }
@@ -172,6 +183,7 @@ export function CollectionItemWidget({
           isLoading={isUpdating}
         />
       </Modal>
+      {isUpdatingError && <AccessError />}
     </>
   );
 }

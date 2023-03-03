@@ -2,12 +2,19 @@ import React from "react";
 import { Box, Grid, IconButton } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { CustomLink, LightTypo, SecondaryHeadingTypo, Spinner } from "../../../shared/components";
+import {
+  CustomLink,
+  ErrorLoadingDocument,
+  LightTypo,
+  SecondaryHeadingTypo,
+  Spinner,
+} from "../../../shared/components";
 import { CollectionPhoto } from "../components/CollectionPhoto";
 import { useGetCollectionQuery } from "../store/collectionsQuery";
 import { CollectionContainer } from "../components/CollectionContainer";
 import { CollectionPaper } from "../components/CollectionPaper";
 import { BackLink } from "../components/BackLink";
+import { useTranslation } from "react-i18next";
 
 interface ICollectionWidgetProps {
   authUser: string;
@@ -20,12 +27,21 @@ export function CollectionWidget({
   isAuthUserAdmin,
   collectionId,
 }: ICollectionWidgetProps) {
-  const { data, isLoading } = useGetCollectionQuery(collectionId);
+  const { t } = useTranslation("collections");
 
-  const isAuthUserCollection = data?.user === authUser;
+  const { data, isLoading, isError } = useGetCollectionQuery(collectionId);
 
   console.log(data);
 
+  const isAuthUserCollection = data?.user === authUser;
+
+  if (isError) {
+    return (
+      <>
+        <ErrorLoadingDocument />
+      </>
+    );
+  }
 
   return (
     <CollectionContainer>
@@ -62,7 +78,7 @@ export function CollectionWidget({
                   {data?.description ? (
                     <ReactMarkdown>{data?.description}</ReactMarkdown>
                   ) : (
-                    <LightTypo sx={{ fontStyle: "italic" }}>Description is empty</LightTypo>
+                    <LightTypo sx={{ fontStyle: "italic" }}>{t("description_empty")}</LightTypo>
                   )}
                 </Box>
               </Box>

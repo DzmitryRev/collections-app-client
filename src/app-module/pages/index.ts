@@ -8,3 +8,4 @@ export * from "./RegistrationPage";
 export * from "./CollectionSettingsPage";
 export * from "./CollectionPage";
 export * from "./ForgotPassword";
+export * from "./MainPage";

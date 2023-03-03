@@ -3,6 +3,7 @@ import { axiosBaseQuery } from "../../../shared/api";
 import { API_URL } from "../../../shared/constants/backend";
 import {
   AddCollectionBodyType,
+  CollectionInCollectionList,
   CollectionItemType,
   CollectionList,
   CollectionType,
@@ -16,6 +17,18 @@ export const collectionsQuery = createApi({
   }),
   tagTypes: ["Collections", "Collection", "Items", "Item"],
   endpoints: (builder) => ({
+    getNewCollections: builder.query<{ collections: CollectionInCollectionList[] }, {}>({
+      query: () => ({
+        url: `/collections/new`,
+        method: "get",
+      }),
+    }),
+    searchCollectionsItems: builder.query<{ items: CollectionItemType[] }, string>({
+      query: (searchValue) => ({
+        url: `/search-items?value=${searchValue}`,
+        method: "get",
+      }),
+    }),
     getUserCollections: builder.query<CollectionList, { userId: string; page: number }>({
       query: ({ userId, page }) => ({
         url: `user/${userId}/collections?page=${page}&itemsPerPage=${COLLECTIONS_PER_PAGE}`,
@@ -151,4 +164,6 @@ export const {
   useDeleteCollectionItemsMutation,
   useToggleLikeCollectionItemMutation,
   useUpdateCollectionItemMutation,
+  useGetNewCollectionsQuery,
+  useSearchCollectionsItemsQuery,
 } = collectionsQuery;

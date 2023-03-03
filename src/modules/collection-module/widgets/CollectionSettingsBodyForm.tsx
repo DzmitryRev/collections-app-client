@@ -8,6 +8,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { useGetCollectionsThemesQuery } from "../store/collectionsQuery";
 import { CollectionType } from "../api/types";
 import { createCollectionBodyValidation } from "../utils/createCollectionBodyValidation";
+import { useTranslation } from "react-i18next";
 
 type CollectionSettingsBodyFormInitialType = {
   name: string;
@@ -26,6 +27,8 @@ export function CollectionSettingsBodyForm({
   isUpdating,
   updateCollection,
 }: ICollectionSettingsBodyForm) {
+  const { t } = useTranslation(["collections", "global"]);
+
   const { data: availableThemes } = useGetCollectionsThemesQuery({});
 
   const initialValues = useMemo(() => {
@@ -48,7 +51,7 @@ export function CollectionSettingsBodyForm({
           <Box sx={{ mb: 2 }}>
             <ValidatedInput
               sx={{ mb: 2 }}
-              label="Name"
+              label={t("name", { ns: "global" })}
               name="name"
               value={values.name}
               touched={formik.touched.name}
@@ -60,7 +63,7 @@ export function CollectionSettingsBodyForm({
             />
             <TextField
               sx={{ mb: 4 }}
-              label="Description"
+              label={t("description")}
               name="description"
               value={values.description}
               onChange={(e) => {
@@ -74,12 +77,12 @@ export function CollectionSettingsBodyForm({
               sx={{ mb: 3, minWidth: "110px" }}
               error={formik.touched.theme && !!formik.errors.theme}
             >
-              <InputLabel id="demo-simple-select-label">Theme</InputLabel>
+              <InputLabel id="demo-simple-select-label">{t("theme")}</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={values.theme}
-                label="Theme"
+                label={t("theme")}
                 name="theme"
                 onChange={(e) => {
                   setFieldValue("theme", e.target.value);
@@ -103,7 +106,7 @@ export function CollectionSettingsBodyForm({
                 startIcon={<SaveIcon />}
                 variant="contained"
               >
-                Save
+                {t("save", { ns: "global" })}
               </LoadingButton>
             </Box>
           </Box>

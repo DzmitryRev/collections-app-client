@@ -10,6 +10,7 @@ import AppSettingsMobile from "./AppSettingsMobile";
 import { useAppSelector } from "../../store";
 import { useLogout } from "../../modules/auth-module";
 import { UserMenu } from "../../modules/user-module";
+import { SearchItemsWidget } from "../../modules/collection-module";
 
 const HeaderContainerSX = {
   height: "70px",
@@ -57,6 +58,7 @@ export default function Header() {
           <Logo />
         </CustomLink>
         <Box sx={HeaderHandlersContainerSX}>
+          <SearchItemsWidget />
           <MobileSettingsContainerSX>
             <AppSettingsMobile />
           </MobileSettingsContainerSX>

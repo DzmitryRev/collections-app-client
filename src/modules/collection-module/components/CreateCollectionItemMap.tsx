@@ -92,13 +92,12 @@ export function CreateCollectionItemMap({
             <FieldContainer key={item.name}>
               <FieldTypeLabelContainer>Date</FieldTypeLabelContainer>
               <MobileDatePicker
-                label={item.name}
                 value={(values[item.name] as string) || ""}
                 onChange={(value: string | null) => {
                   setFieldValue(item.name, value);
                 }}
                 renderInput={(params: TextFieldProps) => (
-                  <TextField name={item.name} error={false} {...params} />
+                  <TextField size="small" name={item.name} error={false} {...params} />
                 )}
               />
             </FieldContainer>

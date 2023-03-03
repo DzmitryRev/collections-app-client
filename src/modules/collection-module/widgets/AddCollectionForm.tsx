@@ -8,6 +8,7 @@ import { ValidatedInput } from "../../../shared/components";
 import { useAddCollectionMutation, useGetCollectionsThemesQuery } from "../store/collectionsQuery";
 import { AddCollectionBodyType } from "../api/types";
 import { createCollectionBodyValidation } from "../utils/createCollectionBodyValidation";
+import { useTranslation } from "react-i18next";
 
 interface ICollectionBodyFormProps {
   userId: string;
@@ -20,6 +21,8 @@ const addCollectionInitialValue = {
 };
 
 export function AddCollectionForm({ userId, closeModal }: ICollectionBodyFormProps) {
+  const { t } = useTranslation("global");
+
   const { data, isSuccess } = useGetCollectionsThemesQuery({});
 
   const [createCollection, { isLoading: isCreating }] = useAddCollectionMutation();
@@ -43,7 +46,7 @@ export function AddCollectionForm({ userId, closeModal }: ICollectionBodyFormPro
             <Box sx={{ mb: 2 }}>
               <ValidatedInput
                 sx={{ mb: 1 }}
-                label="Name"
+                label={t("name")}
                 name="name"
                 value={values.name}
                 touched={formik.touched.name}
@@ -57,12 +60,12 @@ export function AddCollectionForm({ userId, closeModal }: ICollectionBodyFormPro
                 sx={{ mb: 3, minWidth: "110px" }}
                 error={formik.touched.theme && !!formik.errors.theme}
               >
-                <InputLabel id="demo-simple-select-label">Theme</InputLabel>
+                <InputLabel id="demo-simple-select-label">{t("theme")}</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={values.theme}
-                  label="Theme"
+                  label={t("theme")}
                   name="theme"
                   onChange={(e) => {
                     setFieldValue("theme", e.target.value);
@@ -87,7 +90,7 @@ export function AddCollectionForm({ userId, closeModal }: ICollectionBodyFormPro
                 startIcon={<AddIcon />}
                 variant="contained"
               >
-                Create
+                {t("create")}
               </LoadingButton>
             </Box>
           </form>

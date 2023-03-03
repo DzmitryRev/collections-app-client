@@ -6,6 +6,7 @@ import { Formik } from "formik";
 import { ValidatedInput } from "../../../shared/components";
 import { updateUserBodyValidationSchema } from "../utils/updateUserBodyValidation";
 import SaveIcon from "@mui/icons-material/Save";
+import { useTranslation } from "react-i18next";
 
 type UserBodyFormInitialType = { name: string; about: string };
 
@@ -16,6 +17,8 @@ interface IUserBodyFormProps {
 }
 
 export function UserBodyForm({ initialValue, isUpdating, updateUser }: IUserBodyFormProps) {
+  const { t } = useTranslation("global");
+
   const initialValues = useMemo(() => {
     return {
       ...initialValue,
@@ -36,7 +39,7 @@ export function UserBodyForm({ initialValue, isUpdating, updateUser }: IUserBody
           <Box sx={{ mb: 2 }}>
             <ValidatedInput
               sx={{ mb: 2 }}
-              label="Name"
+              label={t("name")}
               name="name"
               value={values.name}
               touched={formik.touched.name}
@@ -48,7 +51,7 @@ export function UserBodyForm({ initialValue, isUpdating, updateUser }: IUserBody
             />
             <TextField
               sx={{ mb: 3 }}
-              label="About"
+              label={t("about")}
               name="about"
               value={values.about}
               onChange={(e) => {
@@ -65,7 +68,7 @@ export function UserBodyForm({ initialValue, isUpdating, updateUser }: IUserBody
                 startIcon={<SaveIcon />}
                 variant="contained"
               >
-                Save
+                {t("save")}
               </LoadingButton>
             </Box>
           </Box>

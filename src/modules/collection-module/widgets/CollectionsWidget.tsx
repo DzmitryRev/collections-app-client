@@ -3,8 +3,10 @@ import { Box, Pagination } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
+  AccessError,
   BodyTypo,
   Button,
+  ErrorLoadingDocument,
   LightTypo,
   Modal,
   SecondaryHeadingTypo,
@@ -17,6 +19,7 @@ import {
 import { AddCollectionForm } from "./AddCollectionForm";
 import { useModal } from "../../../shared/hooks";
 import { COLLECTIONS_PER_PAGE } from "../constants/collectionsPerPage";
+import { useTranslation } from "react-i18next";
 
 interface ICollectionsWidgetProps {
   authUser: string;
@@ -25,39 +28,51 @@ interface ICollectionsWidgetProps {
 }
 
 export function CollectionsWidget({ authUser, isAuthUserAdmin, userId }: ICollectionsWidgetProps) {
+  const { t } = useTranslation(["collections", "global"]);
+
   const [page, setPage] = useState(1);
   const [checkedCollections, setCheckedCollections] = useState<string[]>([]);
   const [isAddCollectionOpen, openAddCollection, closeAddCollection] = useModal();
   const [isConfirmDeleteOpen, openConfirmDelete, closeConfirmDelete] = useModal();
 
-  const { data } = useGetUserCollectionsQuery(
+  const { data, isError } = useGetUserCollectionsQuery(
     { userId, page },
     { refetchOnMountOrArgChange: true }
   );
 
-  const [deleteCollections] = useDeleteCollectionsMutation();
+  const [deleteCollections, { isError: isDeletingError }] = useDeleteCollectionsMutation();
 
   const isAuthUserCollection = authUser === userId;
+
+  if (isError) {
+    return (
+      <>
+        <ErrorLoadingDocument />
+      </>
+    );
+  }
 
   return (
     <>
       <Box sx={{ maxWidth: "660px", mx: "auto", pt: 5 }}>
-        <SecondaryHeadingTypo sx={{ mb: 2, textAlign: "center" }}>Collections</SecondaryHeadingTypo>
+        <SecondaryHeadingTypo sx={{ mb: 2, textAlign: "center" }}>
+          {t("collections")}
+        </SecondaryHeadingTypo>
         <Box sx={{ mb: 1, display: "flex", justifyContent: "end" }}>
-          {isAuthUserCollection && (
-            <Button sx={{ mr: 2 }} variant="outlined" onClick={openAddCollection}>
-              <AddIcon />
-            </Button>
-          )}
           {authUser && (isAuthUserCollection || isAuthUserAdmin) && (
-            <Button
-              variant="outlined"
-              color="error"
-              disabled={!checkedCollections.length}
-              onClick={openConfirmDelete}
-            >
-              <DeleteIcon />
-            </Button>
+            <>
+              <Button sx={{ mr: 2 }} variant="outlined" onClick={openAddCollection}>
+                <AddIcon />
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                disabled={!checkedCollections.length}
+                onClick={openConfirmDelete}
+              >
+                <DeleteIcon />
+              </Button>
+            </>
           )}
         </Box>
         <CollectionsList
@@ -76,7 +91,7 @@ export function CollectionsWidget({ authUser, isAuthUserAdmin, userId }: ICollec
           />
         ) : (
           <LightTypo sx={{ fontStyle: "italic", textAlign: "center" }}>
-            User have't collections
+            {t("havent_collections")}
           </LightTypo>
         )}
       </Box>
@@ -85,8 +100,8 @@ export function CollectionsWidget({ authUser, isAuthUserAdmin, userId }: ICollec
       </Modal>
       <Modal open={isConfirmDeleteOpen} closeModal={closeConfirmDelete}>
         <>
-          <SecondaryHeadingTypo sx={{ mb: 2 }}>Confirm deleting</SecondaryHeadingTypo>
-          <BodyTypo sx={{ mb: 3 }}>Are you sure you want to delete collections?</BodyTypo>
+          <SecondaryHeadingTypo sx={{ mb: 2 }}>{t("confirm_deleting")}</SecondaryHeadingTypo>
+          <BodyTypo sx={{ mb: 3 }}>{t("confirm_deleting_info")}</BodyTypo>
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
               variant="contained"
@@ -100,11 +115,12 @@ export function CollectionsWidget({ authUser, isAuthUserAdmin, userId }: ICollec
                   });
               }}
             >
-              Confirm
+              {t("confirm", { ns: "global" })}
             </Button>
           </Box>
         </>
       </Modal>
+      {isDeletingError && <AccessError />}
     </>
   );
 }

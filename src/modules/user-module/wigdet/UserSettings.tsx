@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, IconButton } from "@mui/material";
-import { Modal, Spinner } from "../../../shared/components";
+import { AccessError, ErrorLoadingDocument, Modal, Spinner } from "../../../shared/components";
 import { ProfileContainer } from "../components/ProfileContainer";
 import { UpdateAvatarForm } from "./UpdateAvatarForm";
 import { ProfilePaper } from "../components/ProfilePaper";
@@ -17,12 +17,21 @@ interface IUserSettingsProps {
 export function UserSettings({ userId }: IUserSettingsProps) {
   const [isChangeAvatarOpen, openChangeAvatar, closeChangeAvatar] = useModal();
 
-  const { data, isLoading } = useGetUserProfileQuery(userId);
-  const [updateUser, { isLoading: isUpdating }] = useUpdateUserBodyMutation();
+  const { data, isLoading, isError } = useGetUserProfileQuery(userId);
+  const [updateUser, { isLoading: isUpdating, isError: isUpdatingError }] =
+    useUpdateUserBodyMutation();
 
   const updateUserBody = (body: UpdateUserBodyType) => {
     updateUser({ id: userId, ...body });
   };
+
+  if (isError) {
+    return (
+      <>
+        <ErrorLoadingDocument />
+      </>
+    );
+  }
 
   const isLoadingOrNoData = isLoading || !data;
 
@@ -59,6 +68,7 @@ export function UserSettings({ userId }: IUserSettingsProps) {
           isUpdating={isUpdating}
         />
       </Modal>
+      {isUpdatingError && <AccessError />}
     </>
   );
 }

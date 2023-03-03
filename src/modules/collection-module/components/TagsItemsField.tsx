@@ -3,6 +3,7 @@ import { Box, IconButton, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "../../../shared/components";
 import { Tag } from "./Tag";
+import { useTranslation } from "react-i18next";
 
 interface ITagsItemField {
   name: string;
@@ -11,6 +12,7 @@ interface ITagsItemField {
 }
 
 export function TagsItemField({ name, value, addField }: ITagsItemField) {
+  const { t } = useTranslation("collections");
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -33,7 +35,6 @@ export function TagsItemField({ name, value, addField }: ITagsItemField) {
         <TextField
           sx={{ mb: 1 }}
           size="small"
-          label={"Add tag"}
           name={"tag"}
           error={error}
           value={inputValue}
@@ -44,7 +45,7 @@ export function TagsItemField({ name, value, addField }: ITagsItemField) {
           fullWidth
         />
         <Button onClick={addTag} variant="contained" size="small">
-          Add Tag
+          {t("add_tag")}
         </Button>
       </Box>
       <Box>

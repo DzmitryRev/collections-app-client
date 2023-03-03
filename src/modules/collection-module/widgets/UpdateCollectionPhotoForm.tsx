@@ -7,6 +7,7 @@ import { useUploadPhoto } from "../../../shared/hooks";
 import { CollectionType } from "../api/types";
 import { CollectionPhoto } from "../components/CollectionPhoto";
 import { LoadingButton } from "@mui/lab";
+import { useTranslation } from "react-i18next";
 
 interface IUpdateColletionPhotoProps {
   photo: string;
@@ -19,6 +20,8 @@ export function UpdateCollectionPhotoForm({
   isUpdating,
   updateCollection,
 }: IUpdateColletionPhotoProps) {
+  const { t } = useTranslation("global");
+
   const updatePhoto = (url: string) => {
     updateCollection({ photo: url });
   };
@@ -56,7 +59,7 @@ export function UpdateCollectionPhotoForm({
           onClick={savePhoto}
           variant="contained"
         >
-          Save
+          {t("save")}
         </LoadingButton>
       </Box>
     </>

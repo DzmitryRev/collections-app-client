@@ -3,7 +3,14 @@ import { Alert, AlertTitle, Box, Grid, IconButton } from "@mui/material";
 import { CollectionPhoto } from "../components/CollectionPhoto";
 import { CollectionSettingsBodyForm } from "./CollectionSettingsBodyForm";
 import { useGetCollectionQuery, useUpdateCollectionMutation } from "../store/collectionsQuery";
-import { Button, Modal, SecondaryHeadingTypo, Spinner } from "../../../shared/components";
+import {
+  AccessError,
+  Button,
+  ErrorLoadingDocument,
+  Modal,
+  SecondaryHeadingTypo,
+  Spinner,
+} from "../../../shared/components";
 import { useModal } from "../../../shared/hooks";
 import { CustomFieldsList } from "../components/CustomFieldsList";
 import { AddCustomFieldForm } from "./AddCustomFieldForm";
@@ -12,6 +19,7 @@ import { CollectionContainer } from "../components/CollectionContainer";
 import { CollectionPaper } from "../components/CollectionPaper";
 import { BackLink } from "../components/BackLink";
 import { CollectionType } from "../api/types";
+import { useTranslation } from "react-i18next";
 
 interface ICollectionSettingsWidgetProps {
   collectionId: string;
@@ -22,8 +30,11 @@ export function CollectionSettingsWidget({
   collectionId,
   authUser,
 }: ICollectionSettingsWidgetProps) {
-  const { data, isLoading } = useGetCollectionQuery(collectionId);
-  const [updateCollectionReq, { isLoading: isUpdating }] = useUpdateCollectionMutation();
+  const { t } = useTranslation("collections");
+
+  const { data, isLoading, isError } = useGetCollectionQuery(collectionId);
+  const [updateCollectionReq, { isLoading: isUpdating, isError: isUpdatingError }] =
+    useUpdateCollectionMutation();
 
   const updateCollection = (body: Partial<CollectionType>) => {
     updateCollectionReq({ ...body, collectionId, userId: authUser })
@@ -42,6 +53,14 @@ export function CollectionSettingsWidget({
 
   const [isChangePhotoOpen, openChangePhoto, closeChangePhoto] = useModal();
   const [isAddCustomFieldOpen, openAddCustomField, closeAddCustomField] = useModal();
+
+  if (isError) {
+    return (
+      <>
+        <ErrorLoadingDocument />
+      </>
+    );
+  }
 
   return (
     <>
@@ -73,19 +92,18 @@ export function CollectionSettingsWidget({
                 </Box>
                 <Box>
                   <Box sx={{ mb: 2 }}>
-                    <SecondaryHeadingTypo>Custom Fields</SecondaryHeadingTypo>
+                    <SecondaryHeadingTypo>{t("custom_fields")}</SecondaryHeadingTypo>
                     <CustomFieldsList
                       customFields={data?.customFields || []}
                       deleteField={deleteCustomField}
                     />
                     <Alert severity="info">
-                      <AlertTitle>Info</AlertTitle>
-                      Если Вы удалите поле, значение для этого поля останется в базе данных, поэтому
-                      вы сможете в любой момент вернуть все значения просто вернув это поле
+                      <AlertTitle>{t("info")}</AlertTitle>
+                      {t("custom_field_info")}
                     </Alert>
                   </Box>
                   <Button onClick={openAddCustomField} variant="contained">
-                    Add custom field
+                    {t("add_custom_field")}
                   </Button>
                 </Box>
               </Grid>
@@ -108,6 +126,7 @@ export function CollectionSettingsWidget({
           isUpdating={isUpdating}
         />
       </Modal>
+      {isUpdatingError && <AccessError />}
     </>
   );
 }
