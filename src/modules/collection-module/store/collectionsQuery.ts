@@ -19,7 +19,7 @@ export const collectionsQuery = createApi({
   endpoints: (builder) => ({
     getNewCollections: builder.query<{ collections: CollectionInCollectionList[] }, {}>({
       query: () => ({
-        url: `/collections/new`,
+        url: `collections/new`,
         method: "get",
       }),
     }),

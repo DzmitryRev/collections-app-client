@@ -33,7 +33,6 @@ export function SearchItemsWidget() {
         result.push(item as string);
       }
     });
-    console.log(result);
     return result.join("|");
   };
 
