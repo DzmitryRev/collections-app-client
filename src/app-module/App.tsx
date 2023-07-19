@@ -10,9 +10,9 @@ import "./api/interceptors/auth.interceptor";
 import "./api/interceptors/connection.interceptor";
 
 function App() {
-  useEffect(() => {
+  // useEffect(() => {
     useCheckAuth();
-  }, []);
+  // }, []);
   return (
     <>
       <Box
