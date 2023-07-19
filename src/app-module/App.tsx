@@ -10,8 +10,6 @@ import "./api/interceptors/auth.interceptor";
 import "./api/interceptors/connection.interceptor";
 
 function App() {
-  useCheckAuth();
-
   return (
     <>
       <Box
