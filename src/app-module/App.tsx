@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Box from "@mui/material/Box";
 import { CssBaseline, GlobalStyles } from "@mui/material";
 import Router from "./router/Router";
@@ -10,6 +10,9 @@ import "./api/interceptors/auth.interceptor";
 import "./api/interceptors/connection.interceptor";
 
 function App() {
+  useEffect(() => {
+    useCheckAuth();
+  }, []);
   return (
     <>
       <Box
